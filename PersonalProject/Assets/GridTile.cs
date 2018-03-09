@@ -8,15 +8,15 @@ public class GridTile : MonoBehaviour {
 
     public bool Free { get; private set; }
 
-    public void UpdateTile()
+    public void place(Structure s)
     {
+        OnThisTile = Instantiate(s);
         OnThisTile.SetPosition(transform.position);
-        OnThisTile.transform.position = transform.position;
         Free = false;
     }
 
 	// Use this for initialization
-	void Awake ()
+	void Start()
     {
         if (OnThisTile == null)
         {

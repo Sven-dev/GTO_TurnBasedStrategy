@@ -37,14 +37,12 @@ public class GridSpawner : MonoBehaviour {
     {
         List<GridTile> FreeTiles = new List<GridTile>();
 
-        for (int x = 0; x < Length; x++)
+
+        foreach (GridTile t in TileArray)
         {
-            for (int y = 0; y < Width; y++)
+            if (t.Free)
             {
-                if (TileArray[x,y].Free)
-                {
-                    FreeTiles.Add(TileArray[x, y]);
-                }
+                FreeTiles.Add(t);
             }
         }
 
