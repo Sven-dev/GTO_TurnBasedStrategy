@@ -41,9 +41,6 @@ public class RootPlacer : Placer {
 
     public Root SpawnRoot(Corner tile1, Corner tile2)
     {
-        //Tile 1 = grid.TileArray[tile1.x, tile1.y]
-
-        //Vector3 Center = tile1.transform.position + (tile1.transform.position - tile2.transform.position) / 2;
         Root r = Instantiate(Prefab, tile1.transform.position, Quaternion.identity);
 
         r.SetRotation(tile1.transform.position, tile2.transform.position);
