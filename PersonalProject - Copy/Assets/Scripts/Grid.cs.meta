@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 261a89895ba5f8c4382053209b5a15b5
+timeCreated: 1520515327
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Tile: {fileID: 114220303918443946, guid: 79cf38164253c7044b11b654eea6d26b, type: 2}
+  - Corner: {fileID: 114126945102301808, guid: 8dceb00a13f2cc648bafe23cf48a0af5, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
