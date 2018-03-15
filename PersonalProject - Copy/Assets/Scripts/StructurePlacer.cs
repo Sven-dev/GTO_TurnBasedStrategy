@@ -8,13 +8,6 @@ public class StructurePlacer : Placer {
     public Structure Tree;
     public List<Structure> StructureList;
 
-    /*
-    private void Awake()
-    {
-        //StructureList = new List<Structure>();
-    }
-    */
-
     public void SpawnTree(Point p)
     {
         StructureList.Add(
@@ -24,11 +17,31 @@ public class StructurePlacer : Placer {
 
     public void BuyUnit(int index)
     {
-        Tile tile = grid.GetFreeTile();
-
-        if (tile != null)
+        foreach(Resource r in GetComponentsInChildren<Resource>())
         {
-            tile.place(StructureList[index]);
+            if (r.Type == ResourceType.Water)
+            {
+                Resource Cost = PrefabList[index].GetComponentInChildren<Resource>();
+                if (r.Amount - Cost.Amount >= 0)
+                {
+                    r.ChangeAmount(-Cost.Amount);
+                    Tile tile = grid.GetFreeTile();
+                    if (tile != null)
+                    {
+                        tile.place(StructureList[index]);
+                        return;
+                    }
+                    else
+                    {
+                        Debug.LogError("Error: no tile selected");
+                    }
+
+                }
+                else
+                {
+                    Debug.Log("You don't have enough " + r.Type.ToString());
+                }
+            }
         }
     }
 }

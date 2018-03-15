@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Resource : MonoBehaviour {
-
+public class Resource : MonoBehaviour
+{
     public int StartAmount;
     public delegate void AmountChanged();
     public event AmountChanged Change;
