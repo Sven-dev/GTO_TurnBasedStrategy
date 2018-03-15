@@ -23,9 +23,19 @@ public class Player : MonoBehaviour
 
     public void StartGame()
     {
-        Point p = grid.GetFreeTile();
+        Point p = grid.GetFreeTilePos();
 
         StructurePlacer.SpawnTree(p);
         RootPlacer.SpawnStartRoots(p, this);
+    }
+
+    public void StartTurn()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void EndTurn()
+    {
+        gameObject.SetActive(false);
     }
 }

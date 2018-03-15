@@ -14,9 +14,8 @@ public class Point
     }
 }
 
-public class Grid : MonoBehaviour {
-
-    public List<Player> PlayerList;
+public class Grid : MonoBehaviour
+{
 
     [Space(10)]
     public Tile Tile;
@@ -35,7 +34,6 @@ public class Grid : MonoBehaviour {
     {
         SpawnGrid();
         SpawnCorners();
-        SpawnStartingStructures();
     }
 
     void SpawnGrid()
@@ -59,14 +57,6 @@ public class Grid : MonoBehaviour {
             {
                 CornerArray[x, y] = Instantiate(Corner, new Vector3(x * 10 - 5, 0.1f, y * 10 - 5), Quaternion.identity);
             }
-        }
-    }
-
-    void SpawnStartingStructures()
-    {
-        foreach (Player p in PlayerList)
-        {
-            p.StartGame();
         }
     }
 
@@ -98,7 +88,7 @@ public class Grid : MonoBehaviour {
         }
     }
 
-    public Point GetFreeTile()
+    public Point GetFreeTilePos()
     {
         List<Tile> FreeTiles = new List<Tile>();
         foreach (Tile t in TileArray)
@@ -123,6 +113,28 @@ public class Grid : MonoBehaviour {
                     }
                 }
             }
+        }
+
+        print("No free tiles left!");
+        return null;
+    }
+
+    public Tile GetFreeTile()
+    {
+        List<Tile> FreeTiles = new List<Tile>();
+        foreach (Tile t in TileArray)
+        {
+            if (t.Free)
+            {
+                FreeTiles.Add(t);
+            }
+        }
+
+        if (FreeTiles.Count > 0)
+        {
+            var number = Random.Range(0, FreeTiles.Count);
+
+            return FreeTiles[number];
         }
 
         print("No free tiles left!");

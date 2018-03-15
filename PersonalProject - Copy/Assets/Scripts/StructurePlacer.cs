@@ -8,10 +8,12 @@ public class StructurePlacer : Placer {
     public Structure Tree;
     public List<Structure> StructureList;
 
+    /*
     private void Awake()
     {
         //StructureList = new List<Structure>();
     }
+    */
 
     public void SpawnTree(Point p)
     {
@@ -22,11 +24,11 @@ public class StructurePlacer : Placer {
 
     public void BuyUnit(int index)
     {
-        /*
+        Tile tile = grid.GetFreeTile();
+
         if (tile != null)
         {
-            //tile.place(StructureList[index]);
+            tile.place(StructureList[index]);
         }
-        */
     }
 }

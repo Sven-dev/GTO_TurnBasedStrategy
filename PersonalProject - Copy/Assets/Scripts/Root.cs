@@ -31,22 +31,22 @@ public class Root : MonoBehaviour
         {
             if (end.x < start.x)
             {
-                rotation = new Vector2(0, 270); //Left
+                rotation = new Vector2(0, 0); //Left
             }
             else //if (end.x > start.x)
             {
-                rotation = new Vector2(0, 90); //Right
+                rotation = new Vector2(0, 180); //Right
             }
         }
         else //if(end.y != start.y )
         {
             if (end.y < start.y)
             {
-                rotation = new Vector2(0, 0); //Up
+                rotation = new Vector2(0, 270); //Up
             }
             else //if (end.y > start.y)
             {
-                rotation = new Vector2(0, 180); //Down
+                rotation = new Vector2(0, 90); //Down
             }
         }
 
