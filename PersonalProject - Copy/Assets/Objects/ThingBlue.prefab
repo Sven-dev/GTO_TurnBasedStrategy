@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d30fc9daba58d204f87249ba44032b6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 0
   Amount: 1
 --- !u!114 &114715955588838486
 MonoBehaviour:
@@ -161,4 +162,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d30fc9daba58d204f87249ba44032b6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Amount: 0
+  Type: 1
+  Amount: 1
