@@ -4,38 +4,36 @@ using UnityEngine;
 
 public class StructurePlacer : Placer {
 
-    public List<Structure> PrefabList;
     public Structure Tree;
     public List<Structure> StructureList;
 
-    public void SpawnTree(Point p)
+    public Point SpawnTree(Player p)
     {
-        StructureList.Add(
-            Instantiate(
-                Tree, grid.TileArray[p.X, p.Y].transform.position, Quaternion.identity));
+        Tile t = grid.GetFreeTile();
+        t.SetOwner(p);
+        t.place(Tree);
+        grid.AddPlayerTiles(t, p);
+        
+        return grid.TileToPoint(t);
     }
 
-    public void BuyUnit(int index)
+    public void BuyStructure(Tile t, int index, Player p)
     {
         foreach(Resource r in GetComponentsInChildren<Resource>())
         {
             if (r.Type == ResourceType.Water)
             {
-                Resource Cost = PrefabList[index].GetComponentInChildren<Resource>();
+                Resource Cost = StructureList[index].GetComponentInChildren<Resource>();
                 if (r.Amount - Cost.Amount >= 0)
                 {
                     r.ChangeAmount(-Cost.Amount);
-                    Tile tile = grid.GetFreeTile();
-                    if (tile != null)
-                    {
-                        tile.place(StructureList[index]);
-                        return;
-                    }
-                    else
-                    {
-                        Debug.LogError("Error: no tile selected");
-                    }
+                    Structure s = StructureList[index];
+                    t.place(s);
 
+                    if (s is Terrainer)
+                    {
+                        grid.AddPlayerTiles(t, p);
+                    }
                 }
                 else
                 {

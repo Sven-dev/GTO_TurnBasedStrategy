@@ -7,6 +7,12 @@ public class Player : MonoBehaviour
     public Grid grid;
     public StructurePlacer StructurePlacer;
     public RootPlacer RootPlacer;
+    public Point BaseTile;
+
+    [HideInInspector]
+    public Tile SelectedTile;
+
+    public Material Color;
 
     // Use this for initialization
     void Start ()
@@ -21,12 +27,20 @@ public class Player : MonoBehaviour
 		
 	}
 
+    public void BuyThing(int index)
+    {
+        if (SelectedTile != null)
+        {
+            StructurePlacer.BuyStructure(SelectedTile, index, this);
+            RootPlacer.SpawnAround(grid.TileToPoint(SelectedTile), this);
+        }
+    }
+
     public void StartGame()
     {
-        Point p = grid.GetFreeTilePos();
-
-        StructurePlacer.SpawnTree(p);
-        RootPlacer.SpawnStartRoots(p, this);
+        Point p = StructurePlacer.SpawnTree(this);
+        BaseTile = p;
+        RootPlacer.SpawnAround(p, this);
     }
 
     public void StartTurn()

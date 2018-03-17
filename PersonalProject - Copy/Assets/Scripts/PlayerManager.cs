@@ -29,6 +29,11 @@ public class PlayerManager : MonoBehaviour {
         }
     }
 
+    public void BuyThing()
+    {
+        PlayerList[CurrentPlayer].BuyThing(0);
+    }
+
     public void NextTurn()
     {
         PlayerList[CurrentPlayer].EndTurn();
@@ -39,5 +44,16 @@ public class PlayerManager : MonoBehaviour {
         }
 
         PlayerList[CurrentPlayer].StartTurn();
+    }
+
+    public Player GetCurrentPlayer()
+    {
+        return PlayerList[CurrentPlayer];
+    }
+
+    public void SelectTile(Tile t)
+    {
+        PlayerList[CurrentPlayer].SelectedTile = t;
+        print("Tile selected");
     }
 }

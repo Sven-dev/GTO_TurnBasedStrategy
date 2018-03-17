@@ -18,8 +18,7 @@ public class RootPlacer : Placer {
 		
 	}
 
-    //Spawns the 4 roots around start-tile
-    public void SpawnStartRoots(Point co, Player p)
+    public void SpawnAround(Point co, Player p)
     {
         Corner[,] corners = new Corner[,]
         {
@@ -32,12 +31,11 @@ public class RootPlacer : Placer {
             c.AddOwnerShip(p);
         }
 
-        SpawnRoot(corners[0,0], corners[0, 1]);
+        SpawnRoot(corners[0, 0], corners[0, 1]);
         SpawnRoot(corners[0, 1], corners[1, 1]);
         SpawnRoot(corners[1, 1], corners[1, 0]);
         SpawnRoot(corners[1, 0], corners[0, 0]);
     }
-
 
     public Root SpawnRoot(Corner tile1, Corner tile2)
     {

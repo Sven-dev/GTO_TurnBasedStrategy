@@ -4,20 +4,37 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour {
 
-    public Structure OnThisTile;
+    private Material Default;
 
-    public bool Free { get; private set; }
+    public Structure OnThisTile;
+    public Player Owner;
+
+    private void Awake()
+    {
+        Default = GetComponent<Material>();
+    }
 
     public void place(Structure s)
     {
         OnThisTile = Instantiate(s);
         OnThisTile.SetPosition(transform.position);
-        Free = false;
     }
 
-	// Use this for initialization
-	void Awake()
+    public void SetOwner(Player p = null)
     {
-        Free = true;
+        if (Owner == null)
+        {
+            Owner = p;
+            if (p != null)
+            {
+                Material m = GetComponent<Material>();
+                m = p.Color;
+            }
+            else
+            {
+                Material m = GetComponent<Material>();
+                m = Default;
+            }
+        }
     }
 }
