@@ -22,9 +22,10 @@ GameObject:
   - component: {fileID: 33916020793439104}
   - component: {fileID: 65267567318374716}
   - component: {fileID: 23792676086543004}
-  - component: {fileID: 114431327143945488}
+  - component: {fileID: 114715955588838486}
+  - component: {fileID: 114365733651166212}
   m_Layer: 0
-  m_Name: ThingBlue
+  m_Name: CreepSpreaderBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,7 +127,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114431327143945488
+--- !u!114 &114365733651166212
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -150,4 +151,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 0
+  Amount: 1
+--- !u!114 &114715955588838486
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1074045215949994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d30fc9daba58d204f87249ba44032b6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 1
   Amount: 1

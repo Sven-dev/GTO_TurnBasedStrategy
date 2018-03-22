@@ -1,21 +1,24 @@
 ﻿using UnityEngine;
 
 [System.Serializable]
-public class ResourceTemp : MonoBehaviour
+public class Resource : MonoBehaviour
 {
     public delegate void AmountChanged();
-    public event AmountChanged Update;
+    public event AmountChanged OnAmountChange;
 
     public int Amount;
 
     public void Start()
     {
-        Update();
+        if (OnAmountChange != null)
+        {
+            OnAmountChange();
+        }
     }
 
     public void Change(int Cost)
     {
         Amount += Cost;
-        Update();
+        OnAmountChange();
     }
 }

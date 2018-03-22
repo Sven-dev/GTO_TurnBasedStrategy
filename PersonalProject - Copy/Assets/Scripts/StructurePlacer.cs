@@ -18,28 +18,32 @@ public class StructurePlacer : Placer {
     }
 
     public void BuyStructure(Tile t, int index, Player p)
-    {
-        foreach(Resource r in GetComponentsInChildren<Resource>())
+    {/*
+        if (t.Owner == p)
         {
-            if (r.Type == ResourceType.Water)
+            foreach (Resource r in GetComponentsInChildren<Resource>())
             {
-                Resource Cost = StructureList[index].GetComponentInChildren<Resource>();
-                if (r.Amount - Cost.Amount >= 0)
+                if (r.Type == ResourceType.Water)
                 {
-                    r.ChangeAmount(-Cost.Amount);
-                    Structure s = StructureList[index];
-                    t.place(s);
-
-                    if (s is Terrainer)
+                    Resource Cost = StructureList[index].GetComponentInChildren<Resource>();
+                    if (r.Amount - Cost.Amount >= 0)
                     {
-                        grid.AddPlayerTiles(t, p);
+                        r.ChangeAmount(-Cost.Amount);
+                        Structure s = StructureList[index];
+                        t.place(s);
+
+                        if (s is Terrainer)
+                        {
+                            grid.AddPlayerTiles(t, p);
+                        }
                     }
-                }
-                else
-                {
-                    Debug.Log("You don't have enough " + r.Type.ToString());
+                    else
+                    {
+                        Debug.Log("You don't have enough " + r.Type.ToString());
+                    }
                 }
             }
         }
+        */
     }
 }

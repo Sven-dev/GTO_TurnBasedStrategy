@@ -3,13 +3,13 @@ using UnityEngine.UI;
 
 public class ResourceViewer : MonoBehaviour {
 
-    public ResourceTemp resource;
+    public Resource resource;
     private Text field;
 
-    private void Start()
+    private void Awake()
     {
         field = GetComponent<Text>();
-        resource.Update += OnChange;
+        resource.OnAmountChange += OnChange;
     }
 
     void OnChange()

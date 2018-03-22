@@ -1,6 +1,6 @@
 ﻿[System.Serializable]
 public class Cost
 {
-    public ResourceTemp resource;
+    public Resource resource;
     public int cost;
 }

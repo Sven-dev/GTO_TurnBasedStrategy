@@ -102,7 +102,7 @@ public class Grid : MonoBehaviour
         List<Tile> FreeTiles = new List<Tile>();
         foreach (Tile t in TileArray)
         {
-            if (t.OnThisTile == null)
+            if (t.OnThisTile == null && t.Owner == null)
             {
                 FreeTiles.Add(t);
             }
@@ -148,50 +148,52 @@ public class Grid : MonoBehaviour
         int range = structure.Range;
 
         List<Tile> rangetiles = new List<Tile>();
-
-        rangetiles.Add(TileArray[tile.Position.X, tile.Position.Y]);
-
-        //counts down range
-        for (int i = range; i > 0; i--)
+        if (TileArray[tile.Position.X, tile.Position.Y].Owner == player)
         {
-            List<Tile> TempList = new List<Tile>();
-            foreach (Tile t in rangetiles)
+            rangetiles.Add(TileArray[tile.Position.X, tile.Position.Y]);
+
+            //counts down range
+            for (int i = range; i > 0; i--)
             {
-                //Get each tile around the tile, if tile is not in list already, add it.
-                if (t.Position.X + 1 < Length)
+                List<Tile> TempList = new List<Tile>();
+                foreach (Tile t in rangetiles)
                 {
-                    if (!rangetiles.Contains(TileArray[t.Position.X + 1, t.Position.Y]))
+                    //Get each tile around the tile, if tile is not in list already, add it.
+                    if (t.Position.X + 1 < Length)
                     {
-                        TempList.Add(TileArray[t.Position.X + 1, t.Position.Y]);
+                        if (!rangetiles.Contains(TileArray[t.Position.X + 1, t.Position.Y]))
+                        {
+                            TempList.Add(TileArray[t.Position.X + 1, t.Position.Y]);
+                        }
+                    }
+
+                    if (t.Position.X - 1 >= 0)
+                    {
+                        if (!rangetiles.Contains(TileArray[t.Position.X - 1, t.Position.Y]))
+                        {
+                            TempList.Add(TileArray[t.Position.X - 1, t.Position.Y]);
+                        }
+                    }
+
+                    if (t.Position.Y + 1 < Width)
+                    {
+                        if (!rangetiles.Contains(TileArray[t.Position.X, t.Position.Y + 1]))
+                        {
+                            TempList.Add(TileArray[t.Position.X, t.Position.Y + 1]);
+                        }
+                    }
+
+                    if (t.Position.Y - 1 >= 0)
+                    {
+                        if (!rangetiles.Contains(TileArray[t.Position.X, t.Position.Y - 1]))
+                        {
+                            TempList.Add(TileArray[t.Position.X, t.Position.Y - 1]);
+                        }
                     }
                 }
 
-                if (t.Position.X - 1 >= 0)
-                {
-                    if (!rangetiles.Contains(TileArray[t.Position.X - 1, t.Position.Y]))
-                    {
-                        TempList.Add(TileArray[t.Position.X - 1, t.Position.Y]);
-                    }
-                }
-
-                if (t.Position.Y + 1 < Width)
-                {
-                    if (!rangetiles.Contains(TileArray[t.Position.X, t.Position.Y + 1]))
-                    {
-                        TempList.Add(TileArray[t.Position.X, t.Position.Y + 1]);
-                    }
-                }
-
-                if (t.Position.Y - 1 >= 0)
-                {
-                    if (!rangetiles.Contains(TileArray[t.Position.X, t.Position.Y - 1]))
-                    {
-                        TempList.Add(TileArray[t.Position.X, t.Position.Y - 1]);
-                    }
-                }
+                rangetiles.AddRange(TempList);
             }
-
-            rangetiles.AddRange(TempList);
         }
 
         foreach (Tile t in rangetiles)
