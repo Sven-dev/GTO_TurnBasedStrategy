@@ -1,21 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ResourceViewer : MonoBehaviour {
 
-    public Resource resource;
+    public ResourceTemp resource;
     private Text field;
 
     private void Start()
     {
         field = GetComponent<Text>();
-        resource.Change += OnChange;
+        resource.Update += OnChange;
     }
 
     void OnChange()
     {
-        field.text = "Water: " + resource.Amount;
+        field.text = resource.gameObject.name + ": " + resource.Amount;
     }
 }
