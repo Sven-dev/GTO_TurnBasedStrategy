@@ -5,7 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Grid grid;
-    public StructurePlacer StructurePlacer;
+    public UnitFactory BaseTree;
+    public List<UnitFactory> structures;
     public RootPlacer RootPlacer;
     public Point BaseTile;
 
@@ -17,7 +18,6 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        StructurePlacer.grid = this.grid;
         RootPlacer.grid = this.grid;
 	}
 	
@@ -27,21 +27,35 @@ public class Player : MonoBehaviour
 		
 	}
 
-    public void BuyThing(int index)
+    public void PlaceStartingTree()
     {
         if (SelectedTile != null)
         {
-            StructurePlacer.BuyStructure(SelectedTile, index, this);
-            RootPlacer.SpawnAround(grid.TileToPoint(SelectedTile), this);
+            Structure s = BaseTree.Buy();
+            Place(s, SelectedTile);
+
+            RootPlacer.SpawnAround(SelectedTile, this);
             DeselectTile();
         }
     }
 
-    public void StartGame()
+    public void GetThing(int index)
     {
-        Point p = StructurePlacer.SpawnTree(this);
-        BaseTile = p;
-        RootPlacer.SpawnAround(p, this);
+        if (SelectedTile != null)
+        {
+            Structure s = structures[index].Buy();
+            Place(s, SelectedTile);
+
+            RootPlacer.SpawnAround(SelectedTile, this);
+            DeselectTile();
+        }
+    }
+
+    //Instantiates a structure on a tile
+    public void Place(Structure s, Tile t)
+    {
+        //[BUG] Doesn't spawn the structure on the tile
+        Instantiate(s, Vector3.zero, Quaternion.identity, t.transform);
     }
 
     public void SelectTile(Tile t)

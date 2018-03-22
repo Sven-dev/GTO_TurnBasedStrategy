@@ -6,6 +6,8 @@ using System.Linq;
 public class RootPlacer : Placer {
 
     public Root Prefab;
+
+    [HideInInspector]
     public List<Root> Rootlist;
 
     // Use this for initialization
@@ -18,12 +20,12 @@ public class RootPlacer : Placer {
 		
 	}
 
-    public void SpawnAround(Point co, Player p)
+    public void SpawnAround(Tile t, Player p)
     {
         Corner[,] corners = new Corner[,]
         {
-            { grid.CornerArray[co.X, co.Y], grid.CornerArray[co.X + 1, co.Y] },
-            { grid.CornerArray[co.X, co.Y +1], grid.CornerArray[co.X + 1, co.Y + 1] }
+            { grid.CornerArray[t.Position.X, t.Position.Y], grid.CornerArray[t.Position.X + 1, t.Position.Y] },
+            { grid.CornerArray[t.Position.X, t.Position.Y +1], grid.CornerArray[t.Position.X + 1, t.Position.Y + 1] }
         };
 
         foreach (Corner c in corners)

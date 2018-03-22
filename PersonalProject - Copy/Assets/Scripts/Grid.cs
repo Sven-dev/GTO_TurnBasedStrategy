@@ -71,7 +71,7 @@ public class Grid : MonoBehaviour
         List<Tile> FreeTiles = new List<Tile>();
         foreach (Tile t in TileArray)
         {
-            if (t.OnThisTile == null)
+            if (t.transform.childCount == 0)
             {
                 FreeTiles.Add(t);
             }
@@ -102,7 +102,7 @@ public class Grid : MonoBehaviour
         List<Tile> FreeTiles = new List<Tile>();
         foreach (Tile t in TileArray)
         {
-            if (t.OnThisTile == null && t.Owner == null)
+            if (t.transform.childCount == 0 && t.Owner == null)
             {
                 FreeTiles.Add(t);
             }
@@ -136,15 +136,10 @@ public class Grid : MonoBehaviour
         return null;
     }
 
-    public void AddToGrid(Tile t, Structure s)
-    {
-
-    }
-
     public void AddPlayerTiles(Tile tile, Player player)
     {
         print("Update terrain");
-        Terrainer structure = (Terrainer)tile.OnThisTile;
+        Terrainer structure = (Terrainer)tile.transform.GetComponentInChildren<Terrainer>();
         int range = structure.Range;
 
         List<Tile> rangetiles = new List<Tile>();

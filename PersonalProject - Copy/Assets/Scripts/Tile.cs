@@ -6,8 +6,6 @@ public class Tile : MonoBehaviour {
 
     public Color Default;
     public Point Position;
-
-    public Structure OnThisTile;
     public Player Owner;
 
     private Renderer r;
@@ -16,12 +14,6 @@ public class Tile : MonoBehaviour {
     {
         r = GetComponent<Renderer>();
         Default = r.material.color;
-    }
-
-    public void place(Structure s)
-    {
-        OnThisTile = Instantiate(s);
-        OnThisTile.SetPosition(transform.position);
     }
 
     public void SetNeutral()

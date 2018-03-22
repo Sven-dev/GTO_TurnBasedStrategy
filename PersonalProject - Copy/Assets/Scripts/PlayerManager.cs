@@ -8,31 +8,11 @@ public class PlayerManager : MonoBehaviour {
     public int CurrentPlayer;
 
     // Use this for initialization
-    void Start ()
+    void Awake ()
     {
-        SpawnStartingStructures();
         CurrentPlayer = 0;
         NextTurn();
 	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
-
-    void SpawnStartingStructures()
-    {
-        foreach (Player p in PlayerList)
-        {
-            p.StartGame();
-        }
-    }
-
-    public void BuyThing()
-    {
-        PlayerList[CurrentPlayer].BuyThing(0);
-    }
 
     public void NextTurn()
     {

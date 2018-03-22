@@ -11,7 +11,7 @@ public class StructurePlacer : Placer {
     {
         Tile t = grid.GetFreeTile();
         t.SetOwner(p);
-        t.place(Tree);
+        
         grid.AddPlayerTiles(t, p);
         
         return grid.TileToPoint(t);

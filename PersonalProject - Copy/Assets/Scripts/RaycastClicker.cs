@@ -5,8 +5,6 @@ using UnityEngine;
 public class RaycastClicker : MonoBehaviour {
 
     private Camera Cam;
-    public Material Outline;
-    private Tile SelectedTile;
     public PlayerManager Manager;
 
 	// Use this for initialization
@@ -36,21 +34,7 @@ public class RaycastClicker : MonoBehaviour {
 
             if (Selected.Owner = Manager.GetCurrentPlayer())
             {
-                //check if tile has structure
-                if (Selected.OnThisTile != null)
-                {
-                    //Manager.BuyThing(); //This needs a index of which structure to buy
-
-                    //Material m = SelectedTile.OnThisTile.GetComponent<Renderer>().material;
-                    //m.shader = Shader.Find("Outlined/Silhouetted Bumped Diffuse");
-
-                    //m = Outline;
-                }
-
                 Manager.SelectTile(Selected);
-
-                //Material m2 = SelectedTile.GetComponent<Renderer>().material;
-                //m2.shader = Shader.Find("Outlined/Silhouetted Bumped Diffuse");
             }
             else
             {

@@ -26,7 +26,7 @@ public class UnitFactory : MonoBehaviour
                 c.resource.Change(-c.cost);
             }
 
-            return Instantiate(prefab);
+            return prefab;
         }
 
         return null;
