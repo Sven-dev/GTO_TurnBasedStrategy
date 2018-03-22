@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public Tile SelectedTile;
 
-    public Material Color;
+    public Color PlayerColor;
 
     // Use this for initialization
     void Start ()
@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
         {
             StructurePlacer.BuyStructure(SelectedTile, index, this);
             RootPlacer.SpawnAround(grid.TileToPoint(SelectedTile), this);
+            DeselectTile();
         }
     }
 
@@ -43,6 +44,17 @@ public class Player : MonoBehaviour
         RootPlacer.SpawnAround(p, this);
     }
 
+    public void SelectTile(Tile t)
+    {
+        SelectedTile = t;
+        t.GetComponent<Renderer>().material.color = Color.white;
+    }
+
+    public void DeselectTile()
+    {
+        SelectedTile.GetComponent<Renderer>().material.color = PlayerColor;
+    }
+
     public void StartTurn()
     {
         gameObject.SetActive(true);
@@ -50,6 +62,8 @@ public class Player : MonoBehaviour
 
     public void EndTurn()
     {
+        //SelectedTile.GetComponent<Renderer>().material.color = SelectedTile.Default.color;
+        SelectedTile = null;
         gameObject.SetActive(false);
     }
 }

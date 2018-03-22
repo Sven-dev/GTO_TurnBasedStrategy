@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour {
 
-    private Material Default;
+    public Color Default;
+    public Point Position;
 
     public Structure OnThisTile;
     public Player Owner;
 
+    private Renderer r;
+
     private void Awake()
     {
-        Default = GetComponent<Material>();
+        r = GetComponent<Renderer>();
+        Default = r.material.color;
     }
 
     public void place(Structure s)
@@ -20,21 +24,18 @@ public class Tile : MonoBehaviour {
         OnThisTile.SetPosition(transform.position);
     }
 
-    public void SetOwner(Player p = null)
+    public void SetNeutral()
+    {
+        Owner = null;
+        r.material.color = Default;
+    }
+
+    public void SetOwner(Player p)
     {
         if (Owner == null)
         {
             Owner = p;
-            if (p != null)
-            {
-                Material m = GetComponent<Material>();
-                m = p.Color;
-            }
-            else
-            {
-                Material m = GetComponent<Material>();
-                m = Default;
-            }
+            r.material.color = p.PlayerColor;
         }
     }
 }

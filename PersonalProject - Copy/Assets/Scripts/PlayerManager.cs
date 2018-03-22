@@ -53,7 +53,12 @@ public class PlayerManager : MonoBehaviour {
 
     public void SelectTile(Tile t)
     {
-        PlayerList[CurrentPlayer].SelectedTile = t;
+        if (PlayerList[CurrentPlayer].SelectedTile != null)
+        {
+            PlayerList[CurrentPlayer].DeselectTile();
+        }
+
+        PlayerList[CurrentPlayer].SelectTile(t);
         print("Tile selected");
     }
 }

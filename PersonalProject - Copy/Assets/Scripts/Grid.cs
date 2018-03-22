@@ -22,8 +22,8 @@ public class Grid : MonoBehaviour
     public Corner Corner;
 
     [Space(10)]
-    public int Length;
-    public int Width;
+    public int Length; //X
+    public int Width; //Y
 
     [Space(10)]
     public Tile[,] TileArray;
@@ -49,6 +49,7 @@ public class Grid : MonoBehaviour
             for (int y = 0; y < Width; y++)
             {
                 TileArray[x, y] = Instantiate(Tile, new Vector3(x * 10, 0, y * 10), Quaternion.identity, Tiles.transform);
+                TileArray[x, y].Position = new Point(x, y);
             }
         }
 
@@ -143,64 +144,59 @@ public class Grid : MonoBehaviour
     public void AddPlayerTiles(Tile tile, Player player)
     {
         print("Update terrain");
-        Point pos = TileToPoint(tile);
         Terrainer structure = (Terrainer)tile.OnThisTile;
         int range = structure.Range;
 
-        /*
-        if (range > 0)
+        List<Tile> rangetiles = new List<Tile>();
+
+        rangetiles.Add(TileArray[tile.Position.X, tile.Position.Y]);
+
+        //counts down range
+        for (int i = range; i > 0; i--)
         {
-            TileArray[pos.X + 1, pos.Y - 1].SetOwner(player);
-            TileArray[pos.X + 1, pos.Y].SetOwner(player);
-            TileArray[pos.X + 1, pos.Y + 1].SetOwner(player);
-            TileArray[pos.X, pos.Y + 1].SetOwner(player);
-            TileArray[pos.X - 1, pos.Y + 1].SetOwner(player);
-            TileArray[pos.X - 1, pos.Y].SetOwner(player);
-            TileArray[pos.X - 1, pos.Y - 1].SetOwner(player);
-            TileArray[pos.X, pos.Y - 1].SetOwner(player);
-        }
-
-        if (range > 1)
-        {
-
-        }
-        */
-
-        /* Sets the range in diamond-shape
-         * 0  0  0  0  0
-         * 0  0  0  0  0
-         * 0  0  0  0  0
-         * 0  0  0  0  0
-         * 0  0  0  0  0
-         *
-         * Get tiles on same y-axis
-         *
-         * 0  0  0  0  0
-         * 0  0  0  0  0
-         * 1  1  1  1  1
-         * 0  0  0  0  0
-         * 0  0  0  0  0
-         * 
-         * Get tiles 1 away from y-axis, but also 1 less from each side of x-axis
-         * Range = 2
-         * X  X  2  X  X
-         * X  1  1  1  X
-         * 0  0  O  0  0
-         * X -1 -1 -1  X
-         * X  X -2  X  X
-         * 
-         * 
-         */
-
-        for (int y = -range; y <= range; y++)
-        {
-            for (int x = range + y; x <= range - y; x++)
+            List<Tile> TempList = new List<Tile>();
+            foreach (Tile t in rangetiles)
             {
-                if (x < Length && y < Width)
+                //Get each tile around the tile, if tile is not in list already, add it.
+                if (t.Position.X + 1 < Length)
                 {
-                    TileArray[pos.X + x, pos.Y + x].SetOwner(player);
+                    if (!rangetiles.Contains(TileArray[t.Position.X + 1, t.Position.Y]))
+                    {
+                        TempList.Add(TileArray[t.Position.X + 1, t.Position.Y]);
+                    }
+                }
+
+                if (t.Position.X - 1 >= 0)
+                {
+                    if (!rangetiles.Contains(TileArray[t.Position.X - 1, t.Position.Y]))
+                    {
+                        TempList.Add(TileArray[t.Position.X - 1, t.Position.Y]);
+                    }
+                }
+
+                if (t.Position.Y + 1 < Width)
+                {
+                    if (!rangetiles.Contains(TileArray[t.Position.X, t.Position.Y + 1]))
+                    {
+                        TempList.Add(TileArray[t.Position.X, t.Position.Y + 1]);
+                    }
+                }
+
+                if (t.Position.Y - 1 >= 0)
+                {
+                    if (!rangetiles.Contains(TileArray[t.Position.X, t.Position.Y - 1]))
+                    {
+                        TempList.Add(TileArray[t.Position.X, t.Position.Y - 1]);
+                    }
                 }
             }
+
+            rangetiles.AddRange(TempList);
+        }
+
+        foreach (Tile t in rangetiles)
+        {
+            t.SetOwner(player);
         }
     }
 }
