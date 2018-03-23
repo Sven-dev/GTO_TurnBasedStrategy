@@ -26,7 +26,7 @@ public class Attacker : Structure
 		
 	}
 
-    public override void SetVariables(Player p, Grid g)
+    public override void StartUp(Player p, Grid g)
     {
         Owner = p;
         this.Grid = g;

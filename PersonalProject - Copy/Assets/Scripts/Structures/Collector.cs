@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Collector : Structure
 {
+    public int Amount;
 
 	// Use this for initialization
 	void Start ()
@@ -25,8 +26,9 @@ public class Collector : Structure
         }
     }
 
-    public override void SetVariables(Player p, Grid g)
+    public override void StartUp(Player p, Grid g)
     {
         Owner = p;
+        Owner.OnTurnChange += CollectResources;
     }
 }

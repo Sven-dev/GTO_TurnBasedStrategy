@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33413602790415992}
   - component: {fileID: 65249412863975738}
   - component: {fileID: 23532891432970028}
-  - component: {fileID: 114546650771462186}
   - component: {fileID: 114935721824915112}
   m_Layer: 0
   m_Name: CreepSpreaderRed
@@ -97,19 +96,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114546650771462186
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1092870471590152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c1335362dd72a6458f39c1d8a722e76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 0
-  Owner: {fileID: 0}
 --- !u!114 &114935721824915112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -124,4 +110,4 @@ MonoBehaviour:
   Health: 0
   Owner: {fileID: 0}
   Grid: {fileID: 0}
-  Range: 3
+  Range: 2

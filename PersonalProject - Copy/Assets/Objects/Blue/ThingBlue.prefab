@@ -22,8 +22,7 @@ GameObject:
   - component: {fileID: 33916020793439104}
   - component: {fileID: 65267567318374716}
   - component: {fileID: 23792676086543004}
-  - component: {fileID: 114633501204589248}
-  - component: {fileID: 114431327143945488}
+  - component: {fileID: 114984856557934286}
   m_Layer: 0
   m_Name: ThingBlue
   m_TagString: Untagged
@@ -97,7 +96,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114431327143945488
+--- !u!114 &114984856557934286
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -105,23 +104,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1074045215949994}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 314efec4af05823408e017c994c30f6d, type: 3}
+  m_Script: {fileID: 11500000, guid: 64512426cd751864f9e2f2d81ac940b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 0
   Owner: {fileID: 0}
   Grid: {fileID: 0}
-  Range: 4
---- !u!114 &114633501204589248
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1074045215949994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c1335362dd72a6458f39c1d8a722e76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 0
-  Owner: {fileID: 0}
+  Range: 3

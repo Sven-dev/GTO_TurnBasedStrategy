@@ -15,6 +15,10 @@ public class Player : MonoBehaviour
 
     public Color PlayerColor;
 
+    public delegate void NewTurn();
+    public event NewTurn OnTurnChange;
+
+
     // Use this for initialization
     void Start ()
     {
@@ -41,7 +45,7 @@ public class Player : MonoBehaviour
 
     public void GetThing(int index)
     {
-        if (SelectedTile != null)
+        if (SelectedTile != null && SelectedTile.transform.childCount == 0 && SelectedTile.Owner == this)
         {
             Structure s = structures[index].Buy();
             Place(s, SelectedTile);
@@ -55,7 +59,7 @@ public class Player : MonoBehaviour
     public void Place(Structure s, Tile t)
     {
         s = Instantiate(s, t.transform.position, Quaternion.identity, t.transform);
-        s.SetVariables(this, grid);
+        s.StartUp(this, grid);
     }
 
     public void SelectTile(Tile t)
@@ -71,6 +75,11 @@ public class Player : MonoBehaviour
 
     public void StartTurn()
     {
+        if (OnTurnChange != null)
+        {
+            OnTurnChange();
+        }
+
         gameObject.SetActive(true);
     }
 

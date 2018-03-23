@@ -7,9 +7,6 @@ public class PlayerManager : MonoBehaviour {
     public List<Player> PlayerList;
     public int CurrentPlayer;
 
-    public delegate void NewTurn();
-    public event NewTurn OnTurnChange;
-
     // Use this for initialization
     void Awake ()
     {
@@ -27,7 +24,6 @@ public class PlayerManager : MonoBehaviour {
         }
 
         PlayerList[CurrentPlayer].StartTurn();
-        //OnTurnChange();
     }
 
     public Player GetCurrentPlayer()

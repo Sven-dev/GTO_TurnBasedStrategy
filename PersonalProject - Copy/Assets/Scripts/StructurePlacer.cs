@@ -12,7 +12,7 @@ public class StructurePlacer : Placer {
         Tile t = grid.GetFreeTile();
         t.SetOwner(p);
         
-        grid.AddPlayerTiles(t, p);
+        //grid.GetRangeTiles(t, p);
         
         return grid.TileToPoint(t);
     }

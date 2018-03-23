@@ -136,59 +136,52 @@ public class Grid : MonoBehaviour
         return null;
     }
 
-    public List<Tile> AddPlayerTiles(Tile tile, Player player)
+    public List<Tile> GetRangeTiles(Tile tile, int range, Player player)
     {
-        print("Update terrain");
-        Terrainer structure = (Terrainer)tile.transform.GetComponentInChildren<Terrainer>();
-        int range = structure.Range;
-
         List<Tile> rangetiles = new List<Tile>();
-        if (TileArray[tile.Position.X, tile.Position.Y].Owner == player)
+        rangetiles.Add(TileArray[tile.Position.X, tile.Position.Y]);
+
+        //counts down range
+        for (int i = range; i > 0; i--)
         {
-            rangetiles.Add(TileArray[tile.Position.X, tile.Position.Y]);
-
-            //counts down range
-            for (int i = range; i > 0; i--)
+            List<Tile> TempList = new List<Tile>();
+            foreach (Tile t in rangetiles)
             {
-                List<Tile> TempList = new List<Tile>();
-                foreach (Tile t in rangetiles)
+                //Get each tile around the tile, if tile is not in list already, add it.
+                if (t.Position.X + 1 < Length)
                 {
-                    //Get each tile around the tile, if tile is not in list already, add it.
-                    if (t.Position.X + 1 < Length)
+                    if (!rangetiles.Contains(TileArray[t.Position.X + 1, t.Position.Y]))
                     {
-                        if (!rangetiles.Contains(TileArray[t.Position.X + 1, t.Position.Y]))
-                        {
-                            TempList.Add(TileArray[t.Position.X + 1, t.Position.Y]);
-                        }
-                    }
-
-                    if (t.Position.X - 1 >= 0)
-                    {
-                        if (!rangetiles.Contains(TileArray[t.Position.X - 1, t.Position.Y]))
-                        {
-                            TempList.Add(TileArray[t.Position.X - 1, t.Position.Y]);
-                        }
-                    }
-
-                    if (t.Position.Y + 1 < Width)
-                    {
-                        if (!rangetiles.Contains(TileArray[t.Position.X, t.Position.Y + 1]))
-                        {
-                            TempList.Add(TileArray[t.Position.X, t.Position.Y + 1]);
-                        }
-                    }
-
-                    if (t.Position.Y - 1 >= 0)
-                    {
-                        if (!rangetiles.Contains(TileArray[t.Position.X, t.Position.Y - 1]))
-                        {
-                            TempList.Add(TileArray[t.Position.X, t.Position.Y - 1]);
-                        }
+                        TempList.Add(TileArray[t.Position.X + 1, t.Position.Y]);
                     }
                 }
 
-                rangetiles.AddRange(TempList);
+                if (t.Position.X - 1 >= 0)
+                {
+                    if (!rangetiles.Contains(TileArray[t.Position.X - 1, t.Position.Y]))
+                    {
+                        TempList.Add(TileArray[t.Position.X - 1, t.Position.Y]);
+                    }
+                }
+
+                if (t.Position.Y + 1 < Width)
+                {
+                    if (!rangetiles.Contains(TileArray[t.Position.X, t.Position.Y + 1]))
+                    {
+                        TempList.Add(TileArray[t.Position.X, t.Position.Y + 1]);
+                    }
+                }
+
+                if (t.Position.Y - 1 >= 0)
+                {
+                    if (!rangetiles.Contains(TileArray[t.Position.X, t.Position.Y - 1]))
+                    {
+                        TempList.Add(TileArray[t.Position.X, t.Position.Y - 1]);
+                    }
+                }
             }
+
+            rangetiles.AddRange(TempList);          
         }
 
         return rangetiles;
