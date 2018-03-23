@@ -24,4 +24,9 @@ public class Collector : Structure
             //Add resource to player the collector belong to
         }
     }
+
+    public override void SetVariables(Player p, Grid g)
+    {
+        Owner = p;
+    }
 }

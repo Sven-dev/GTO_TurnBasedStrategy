@@ -54,8 +54,8 @@ public class Player : MonoBehaviour
     //Instantiates a structure on a tile
     public void Place(Structure s, Tile t)
     {
-        Structure go = Instantiate(s, t.transform.position, Quaternion.identity, t.transform);
-        //go.gameObject
+        s = Instantiate(s, t.transform.position, Quaternion.identity, t.transform);
+        s.SetVariables(this, grid);
     }
 
     public void SelectTile(Tile t)

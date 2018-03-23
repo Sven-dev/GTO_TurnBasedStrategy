@@ -14,6 +14,8 @@ public class Attacker : Structure
     public int MinRange;
     public int MaxRange;
 
+    public Grid Grid;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -23,4 +25,10 @@ public class Attacker : Structure
 	void Update () {
 		
 	}
+
+    public override void SetVariables(Player p, Grid g)
+    {
+        Owner = p;
+        this.Grid = g;
+    }
 }
