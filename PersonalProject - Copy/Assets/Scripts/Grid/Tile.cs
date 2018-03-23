@@ -30,4 +30,20 @@ public class Tile : MonoBehaviour {
             r.material.color = p.PlayerColor;
         }
     }
+
+    public void Select()
+    {
+        GetComponent<Renderer>().material.color = Color.white;
+    }
+
+    public void Deselect()
+    {
+        if (Owner == null)
+        {
+            GetComponent<Renderer>().material.color = Default;
+            return;
+        }
+
+        GetComponent<Renderer>().material.color = Owner.PlayerColor;
+    }
 }

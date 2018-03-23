@@ -54,19 +54,19 @@ public class Player : MonoBehaviour
     //Instantiates a structure on a tile
     public void Place(Structure s, Tile t)
     {
-        //[BUG] Doesn't spawn the structure on the tile
-        Instantiate(s, Vector3.zero, Quaternion.identity, t.transform);
+        Structure go = Instantiate(s, t.transform.position, Quaternion.identity, t.transform);
+        //go.gameObject
     }
 
     public void SelectTile(Tile t)
     {
         SelectedTile = t;
-        t.GetComponent<Renderer>().material.color = Color.white;
+        t.Select();
     }
 
     public void DeselectTile()
     {
-        SelectedTile.GetComponent<Renderer>().material.color = PlayerColor;
+        SelectedTile.Deselect();
     }
 
     public void StartTurn()

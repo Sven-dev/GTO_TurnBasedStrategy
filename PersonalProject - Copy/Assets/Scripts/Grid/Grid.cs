@@ -136,7 +136,7 @@ public class Grid : MonoBehaviour
         return null;
     }
 
-    public void AddPlayerTiles(Tile tile, Player player)
+    public List<Tile> AddPlayerTiles(Tile tile, Player player)
     {
         print("Update terrain");
         Terrainer structure = (Terrainer)tile.transform.GetComponentInChildren<Terrainer>();
@@ -191,9 +191,6 @@ public class Grid : MonoBehaviour
             }
         }
 
-        foreach (Tile t in rangetiles)
-        {
-            t.SetOwner(player);
-        }
+        return rangetiles;
     }
 }

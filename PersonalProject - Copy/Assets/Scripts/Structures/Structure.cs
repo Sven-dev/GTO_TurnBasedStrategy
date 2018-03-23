@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class Structure : MonoBehaviour {
 
+    public int Health;
+    public Player Owner;
 
-
-    public void SetPosition(Vector3 pos)
-    {
-        transform.position = pos;
-    }
 }

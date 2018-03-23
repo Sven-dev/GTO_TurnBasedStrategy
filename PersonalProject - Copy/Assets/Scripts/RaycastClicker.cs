@@ -31,10 +31,11 @@ public class RaycastClicker : MonoBehaviour {
         if (hit.collider != null)
         {
             Tile Selected = hit.collider.GetComponent<Tile>();
+            Manager.SelectTile(Selected);
 
-            if (Selected.Owner = Manager.GetCurrentPlayer())
+            if (Selected.Owner == Manager.GetCurrentPlayer())
             {
-                Manager.SelectTile(Selected);
+                
             }
             else
             {

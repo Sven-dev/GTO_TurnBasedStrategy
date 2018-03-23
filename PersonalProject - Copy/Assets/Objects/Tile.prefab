@@ -109,6 +109,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6efb18b045e2ac44ca4482e3e13e0b5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Default: {fileID: 2100000, guid: 380509416819a0748b20b50784c6bd2c, type: 2}
-  OnThisTile: {fileID: 0}
+  Default: {r: 0.37084475, g: 0.64705884, b: 0.31877163, a: 0}
   Owner: {fileID: 0}

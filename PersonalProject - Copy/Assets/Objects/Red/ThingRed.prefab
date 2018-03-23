@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33413602790415992}
   - component: {fileID: 65249412863975738}
   - component: {fileID: 23532891432970028}
+  - component: {fileID: 114210318834180702}
   - component: {fileID: 114935721824915112}
   m_Layer: 0
   m_Name: ThingRed
@@ -37,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1092870471590152}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 111.41208, y: 2.6453938, z: 104.21842}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -96,6 +97,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114210318834180702
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1092870471590152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c1335362dd72a6458f39c1d8a722e76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 0
+  Owner: {fileID: 0}
 --- !u!114 &114935721824915112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -107,4 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 314efec4af05823408e017c994c30f6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Range: 2
+  Health: 0
+  Owner: {fileID: 0}
+  Grid: {fileID: 0}
+  Range: 4
