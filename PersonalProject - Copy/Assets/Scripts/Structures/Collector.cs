@@ -4,37 +4,26 @@ using UnityEngine;
 
 public class Collector : Structure
 {
-    public ResourceSpot Spot;
-
-	// Use this for initialization
-	void Start ()
-    {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
-
-    public void ConnectToSpot(ResourceSpot spot)
-    {
-        Spot = spot;
-    }
+    public int Amount;
+    public Resource Resource;
 
     public void CollectResources()
     {
-        transform.GetChild(0);
-        foreach (Resource r in GetComponentsInChildren<Resource>())
-        {
-            //Add resource to player the collector belong to
-        }
+        print("Collecting resources");
+        this.Resource.Change(this.Amount);
+    }
+
+    public void AttachResources()
+    {
+        int index = (int)transform.parent.GetChild(0).GetComponent<ResourceSpot>().Type;
+        Resource[] r = Owner.GetResources();
+        this.Resource = r[index];
     }
 
     public override void StartUp(Player p, Grid g)
     {
         Owner = p;
         Owner.OnTurnChange += CollectResources;
+        AttachResources();
     }
 }

@@ -9,46 +9,46 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1744763041149378}
+  m_RootGameObject: {fileID: 1114109626206254}
   m_IsPrefabParent: 1
---- !u!1 &1744763041149378
+--- !u!1 &1114109626206254
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4960708931513106}
-  - component: {fileID: 33230534124849050}
-  - component: {fileID: 65361968666625404}
-  - component: {fileID: 23360638427670134}
-  - component: {fileID: 114896221031669504}
+  - component: {fileID: 4167110924029272}
+  - component: {fileID: 33584547112664568}
+  - component: {fileID: 65129508538072518}
+  - component: {fileID: 23590838490563390}
+  - component: {fileID: 114577745567685484}
   m_Layer: 0
-  m_Name: Co2Blue
+  m_Name: WaterCollector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4960708931513106
+--- !u!4 &4167110924029272
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1744763041149378}
+  m_GameObject: {fileID: 1114109626206254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 130.39626, y: 12.81658, z: 96.455734}
+  m_LocalPosition: {x: 127.855385, y: 15.206177, z: 95.75808}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23360638427670134
+--- !u!23 &23590838490563390
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1744763041149378}
+  m_GameObject: {fileID: 1114109626206254}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -77,31 +77,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33230534124849050
+--- !u!33 &33584547112664568
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1744763041149378}
+  m_GameObject: {fileID: 1114109626206254}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65361968666625404
+--- !u!65 &65129508538072518
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1744763041149378}
+  m_GameObject: {fileID: 1114109626206254}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114896221031669504
+--- !u!114 &114577745567685484
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1744763041149378}
+  m_GameObject: {fileID: 1114109626206254}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa69995ed99edfa41b410922f3337bee, type: 3}
@@ -109,4 +109,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 0
   Owner: {fileID: 0}
-  Amount: 0
+  Spot: {fileID: 0}

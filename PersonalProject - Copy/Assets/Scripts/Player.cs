@@ -60,7 +60,8 @@ public class Player : MonoBehaviour
         if (SelectedTile != null && SelectedTile.Owner == this)
         {
             ResourceSpot spot = SelectedTile.GetComponentInChildren<ResourceSpot>();
-            if (spot != null)
+            Structure building = SelectedTile.GetComponentInChildren<Structure>();
+            if (spot != null && building == null)
             {
                 Structure s = null;
                 switch (spot.Type)
@@ -79,11 +80,14 @@ public class Player : MonoBehaviour
                 if (s != null)
                 {
                     Place(s, SelectedTile);
-                    Collector c = s as Collector;
-                    c.ConnectToSpot(spot);
                 }
             }
         }
+    }
+
+    public Resource[] GetResources()
+    {
+        return transform.GetChild(1).GetComponentsInChildren<Resource>();
     }
 
     //Instantiates a structure on a tile

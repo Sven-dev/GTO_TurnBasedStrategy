@@ -6,22 +6,23 @@ public class BaseTree : Structure
 {
     public Grid Grid;
     public int Range;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public int Amount;
+    public List<Resource> Resources;
 
     public void CollectResources()
     {
-        foreach (Resource r in GetComponentsInChildren<Resource>())
+        foreach(Resource r in Resources)
         {
-            //Add resource to player the collector belong to
+            r.Amount += this.Amount;
+        }
+
+    }
+
+    public void AttachResources()
+    {
+        foreach (Resource r in Owner.GetResources())
+        {
+            Resources.Add(r);
         }
     }
 
@@ -41,5 +42,7 @@ public class BaseTree : Structure
 
         ConvertTiles();
         Owner.OnTurnChange += CollectResources;
+
+        AttachResources();
     }
 }

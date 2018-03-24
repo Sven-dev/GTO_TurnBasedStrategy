@@ -19,6 +19,9 @@ public class Resource : MonoBehaviour
     public void Change(int Cost)
     {
         Amount += Cost;
-        OnAmountChange();
+        if (OnAmountChange != null)
+        {
+            OnAmountChange();
+        }
     }
 }
