@@ -66,13 +66,13 @@ public class Player : MonoBehaviour
                 switch (spot.Type)
                 {
                     case ResourceType.Water:
-                        s = structures[1].Buy();
-                        break;
-                    case ResourceType.co2:
                         s = structures[2].Buy();
                         break;
-                    case ResourceType.Solar:
+                    case ResourceType.co2:
                         s = structures[3].Buy();
+                        break;
+                    case ResourceType.Solar:
+                        s = structures[4].Buy();
                         break;
                 }
 

@@ -9,20 +9,34 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
+<<<<<<< Updated upstream
   m_RootGameObject: {fileID: 1998462257157978}
   m_IsPrefabParent: 1
 --- !u!1 &1998462257157978
+=======
+  m_RootGameObject: {fileID: 1074309517345866}
+  m_IsPrefabParent: 1
+--- !u!1 &1074309517345866
+>>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
+<<<<<<< Updated upstream
   - component: {fileID: 4403032745742500}
   - component: {fileID: 33597560392683148}
   - component: {fileID: 65502347258145654}
   - component: {fileID: 23833673678226532}
   - component: {fileID: 114904170474691976}
+=======
+  - component: {fileID: 4285210583257210}
+  - component: {fileID: 33643593088230862}
+  - component: {fileID: 65953023268384140}
+  - component: {fileID: 23581943140782054}
+  - component: {fileID: 114177354496211932}
+>>>>>>> Stashed changes
   m_Layer: 0
   m_Name: WaterRed
   m_TagString: Untagged
@@ -30,25 +44,43 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< Updated upstream
 --- !u!4 &4403032745742500
+=======
+--- !u!4 &4285210583257210
+>>>>>>> Stashed changes
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 1998462257157978}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 232.90865, y: 137.765, z: 91.33249}
+=======
+  m_GameObject: {fileID: 1074309517345866}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 128.5968, y: 13.855173, z: 99.05143}
+>>>>>>> Stashed changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream
 --- !u!23 &23833673678226532
+=======
+--- !u!23 &23581943140782054
+>>>>>>> Stashed changes
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 1998462257157978}
+=======
+  m_GameObject: {fileID: 1074309517345866}
+>>>>>>> Stashed changes
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -77,31 +109,53 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+<<<<<<< Updated upstream
 --- !u!33 &33597560392683148
+=======
+--- !u!33 &33643593088230862
+>>>>>>> Stashed changes
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 1998462257157978}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &65502347258145654
+=======
+  m_GameObject: {fileID: 1074309517345866}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65953023268384140
+>>>>>>> Stashed changes
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 1998462257157978}
+=======
+  m_GameObject: {fileID: 1074309517345866}
+>>>>>>> Stashed changes
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream
 --- !u!114 &114904170474691976
+=======
+--- !u!114 &114177354496211932
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 1998462257157978}
+=======
+  m_GameObject: {fileID: 1074309517345866}
+>>>>>>> Stashed changes
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa69995ed99edfa41b410922f3337bee, type: 3}
@@ -109,4 +163,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 0
   Owner: {fileID: 0}
+<<<<<<< Updated upstream
   Spot: {fileID: 0}
+=======
+  Amount: 0
+>>>>>>> Stashed changes
