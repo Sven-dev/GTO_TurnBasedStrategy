@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Collector : Structure
 {
-    public int Amount;
+    public ResourceSpot Spot;
 
 	// Use this for initialization
 	void Start ()
@@ -18,8 +18,14 @@ public class Collector : Structure
 		
 	}
 
+    public void ConnectToSpot(ResourceSpot spot)
+    {
+        Spot = spot;
+    }
+
     public void CollectResources()
     {
+        transform.GetChild(0);
         foreach (Resource r in GetComponentsInChildren<Resource>())
         {
             //Add resource to player the collector belong to

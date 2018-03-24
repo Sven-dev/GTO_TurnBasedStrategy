@@ -55,6 +55,37 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void GetCollector()
+    {
+        if (SelectedTile != null && SelectedTile.Owner == this)
+        {
+            ResourceSpot spot = SelectedTile.GetComponentInChildren<ResourceSpot>();
+            if (spot != null)
+            {
+                Structure s = null;
+                switch (spot.Type)
+                {
+                    case ResourceType.Water:
+                        s = structures[1].Buy();
+                        break;
+                    case ResourceType.co2:
+                        s = structures[2].Buy();
+                        break;
+                    case ResourceType.Solar:
+                        s = structures[3].Buy();
+                        break;
+                }
+
+                if (s != null)
+                {
+                    Place(s, SelectedTile);
+                    Collector c = s as Collector;
+                    c.ConnectToSpot(spot);
+                }
+            }
+        }
+    }
+
     //Instantiates a structure on a tile
     public void Place(Structure s, Tile t)
     {

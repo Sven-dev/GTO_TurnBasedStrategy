@@ -68,8 +68,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4389195823899524}
   - component: {fileID: 33725505850558592}
-  - component: {fileID: 64876881688924420}
   - component: {fileID: 23951122244965456}
+  - component: {fileID: 114376340019083554}
   m_Layer: 0
   m_Name: SolarMesh
   m_TagString: Untagged
@@ -110,7 +110,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1800135446486214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.2025986, y: 1.4198303, z: 12.7}
+  m_LocalPosition: {x: 232.38951, y: 137.88824, z: 92.65952}
   m_LocalScale: {x: 0.75, y: 1, z: 0.75}
   m_Children:
   - {fileID: 4474255487823440}
@@ -173,20 +173,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1800135446486214}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &64876881688924420
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1800135446486214}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &114304657156994112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -199,6 +185,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Amount: 1
+--- !u!114 &114376340019083554
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1800135446486214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b927e303c186e42a34a6bbf4967134, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 2
 --- !u!114 &114672282517409176
 MonoBehaviour:
   m_ObjectHideFlags: 1
