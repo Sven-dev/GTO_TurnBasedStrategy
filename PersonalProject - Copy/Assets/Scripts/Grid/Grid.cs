@@ -16,10 +16,10 @@ public class Point
 
 public class Grid : MonoBehaviour
 {
-
     [Space(10)]
     public Tile Tile;
     public Corner Corner;
+    public List<GameObject> Resources;
 
     [Space(10)]
     public int Length; //X
@@ -33,6 +33,7 @@ public class Grid : MonoBehaviour
     void Start()
     {
         SpawnGrid();
+        AddResources();
     }
 
     //Spawns the field tile and corner prefabs for the length and width given.
@@ -62,6 +63,20 @@ public class Grid : MonoBehaviour
             for (int y = 0; y < Width + 1; y++)
             {
                 CornerArray[x, y] = Instantiate(Corner, new Vector3(x * 10 - 5, 0.1f, y * 10 - 5), Quaternion.identity, Corners.transform);
+            }
+        }
+    }
+
+    //Adds resources to the grid, based on how large it is.
+    public void AddResources()
+    {
+        int amount = Length * Width / 10 / Resources.Count;
+        foreach(GameObject g in Resources)
+        {
+            for (int i = amount; i > 0; i--)
+            {
+                Tile t = GetFreeTile();
+                Instantiate(g, t.transform.position + Vector3.up, Quaternion.identity, t.transform);
             }
         }
     }

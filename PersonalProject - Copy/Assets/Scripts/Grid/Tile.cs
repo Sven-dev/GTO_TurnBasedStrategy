@@ -46,4 +46,15 @@ public class Tile : MonoBehaviour {
 
         GetComponent<Renderer>().material.color = Owner.PlayerColor;
     }
+
+    //Checks what structure is on the tile, and returns it
+    public Structure GetStructure()
+    {
+        return transform.GetComponentInChildren<Structure>();
+    }
+
+    public Resource GetResource()
+    {
+        return GetComponentInChildren<Resource>();
+    }
 }
