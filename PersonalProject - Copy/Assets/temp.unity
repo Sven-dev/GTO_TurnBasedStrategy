@@ -817,6 +817,9 @@ MonoBehaviour:
   structures:
   - {fileID: 859377779}
   - {fileID: 2064240391}
+  - {fileID: 1867453102}
+  - {fileID: 580660696}
+  - {fileID: 1202741522}
   RootPlacer: {fileID: 418945789}
   SelectedTile: {fileID: 0}
   PlayerColor: {r: 0, g: 1, b: 1, a: 1}
@@ -1031,13 +1034,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa9f48f2b1e08f6458e1c870225af2c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 114935721824915112, guid: f3ed9c94ac775aa43ba8cbee91e2c11f, type: 2}
+  prefab: {fileID: 114707619021971628, guid: 869eff52d6216744d863e853c5f48700, type: 2}
   unitCost:
-  - resource: {fileID: 1620351839}
+  - resource: {fileID: 1459878877}
     cost: 1
-  - resource: {fileID: 772939963}
+  - resource: {fileID: 1925598925}
     cost: 1
-  - resource: {fileID: 179141069}
+  - resource: {fileID: 265031122}
     cost: 1
 --- !u!1 &670391658
 GameObject:
@@ -1627,9 +1630,9 @@ MonoBehaviour:
   structures:
   - {fileID: 1258002679}
   - {fileID: 97596528}
-  - {fileID: 97596528}
-  - {fileID: 97596528}
-  - {fileID: 97596528}
+  - {fileID: 1725982973}
+  - {fileID: 1144795969}
+  - {fileID: 1538442638}
   RootPlacer: {fileID: 825016871}
   SelectedTile: {fileID: 0}
   PlayerColor: {r: 1, g: 0.457, b: 0.6290061, a: 1}
@@ -2121,7 +2124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa9f48f2b1e08f6458e1c870225af2c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 114935721824915112, guid: f3ed9c94ac775aa43ba8cbee91e2c11f, type: 2}
+  prefab: {fileID: 114549558373644206, guid: e7e857d5dc4b8964aa6835cb532e5a8a, type: 2}
   unitCost:
   - resource: {fileID: 1620351839}
     cost: 1
@@ -2169,13 +2172,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa9f48f2b1e08f6458e1c870225af2c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 114935721824915112, guid: f3ed9c94ac775aa43ba8cbee91e2c11f, type: 2}
+  prefab: {fileID: 114999541082477014, guid: 1f1a47607bc11e7498e86a4997deaf1a, type: 2}
   unitCost:
-  - resource: {fileID: 1620351839}
+  - resource: {fileID: 1459878877}
     cost: 1
-  - resource: {fileID: 772939963}
+  - resource: {fileID: 1925598925}
     cost: 1
-  - resource: {fileID: 179141069}
+  - resource: {fileID: 265031122}
     cost: 1
 --- !u!1 &1217502148
 GameObject:
@@ -2984,7 +2987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa9f48f2b1e08f6458e1c870225af2c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 114935721824915112, guid: f3ed9c94ac775aa43ba8cbee91e2c11f, type: 2}
+  prefab: {fileID: 114969347501438490, guid: 34baa51eb89aaf84eb61fe6d9aa605fa, type: 2}
   unitCost:
   - resource: {fileID: 1620351839}
     cost: 1
@@ -3376,7 +3379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa9f48f2b1e08f6458e1c870225af2c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 114935721824915112, guid: f3ed9c94ac775aa43ba8cbee91e2c11f, type: 2}
+  prefab: {fileID: 114920962876143066, guid: 923fb99e4ab0b8b4dad6e19c02420bdb, type: 2}
   unitCost:
   - resource: {fileID: 1620351839}
     cost: 1
@@ -3424,13 +3427,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa9f48f2b1e08f6458e1c870225af2c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 114935721824915112, guid: f3ed9c94ac775aa43ba8cbee91e2c11f, type: 2}
+  prefab: {fileID: 114577745567685484, guid: 98d1c1a6e4d32664a80e6b7ba4d2dac0, type: 2}
   unitCost:
-  - resource: {fileID: 1620351839}
+  - resource: {fileID: 1459878877}
     cost: 1
-  - resource: {fileID: 772939963}
+  - resource: {fileID: 1925598925}
     cost: 1
-  - resource: {fileID: 179141069}
+  - resource: {fileID: 265031122}
     cost: 1
 --- !u!1 &1874453085
 GameObject:

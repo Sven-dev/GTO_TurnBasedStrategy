@@ -109,4 +109,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 0
   Owner: {fileID: 0}
-  Spot: {fileID: 0}
+  Amount: 1
+  Resource: {fileID: 0}
