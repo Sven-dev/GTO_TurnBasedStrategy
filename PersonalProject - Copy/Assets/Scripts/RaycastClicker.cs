@@ -18,11 +18,16 @@ public class RaycastClicker : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Cast();
+            Cast(0);
+        }
+
+        if (Input.GetMouseButtonDown(1) && Manager.GetCurrentPlayer().SelectedTile != null)
+        {
+            Cast(1);
         }
 	}
 
-    void Cast()
+    void Cast(int button)
     {
         Ray ray = Cam.ScreenPointToRay(Input.mousePosition);
         Debug.DrawRay(ray.origin, ray.direction * 100, Color.yellow, 10);
@@ -32,69 +37,82 @@ public class RaycastClicker : MonoBehaviour {
         if (hit.collider != null)
         {
             Tile Selected = hit.collider.GetComponent<Tile>();
-            Manager.SelectTile(Selected);
 
-            Structure s = Selected.GetStructure();
-            Resource r = Selected.GetResource();
-
-            //Tile has a structure on it                     
-            if (s != null)
+            if (button == 0)
             {
-                //Display health
+                Select(Selected);
+            }
+            else if (button == 1)
+            {
+                Attack(Selected);
+            }
+            
+        }
+    }
 
-                if (s is Attacker)
+    //On right click, attacks the clicked structure with the selected attacker
+    public void Attack(Tile Selected)
+    {
+        Tile target = Manager.GetCurrentPlayer().SelectedTile;
+        Structure attacker = target.GetStructure();
+
+        Structure defender = Selected.GetStructure();
+
+        //Check if selected tile is an attacker                   
+        if (attacker != null)
+        {
+            if (attacker is Attacker)
+            {
+                Attacker a = attacker as Attacker;
+
+                //Check if tile is in range
+                if (a.Tiles.Contains(target))
                 {
-                    Attacker a = s as Attacker;
-                    //display attack range
-                }
-                else if (s is Terrainer)
-                {
-                    //display terrain range
+                    //Deal Damage
+                    a.DealDamage(defender);
                 }
             }
-            //Tile has a resource on it
-            else if (r != null)
+        }
+    }
+
+    public void Select(Tile Selected)
+    {
+        Manager.SelectTile(Selected);
+        Structure s = Selected.GetStructure();
+        Resource r = Selected.GetResource();
+
+        //Tile has a structure on it                     
+        if (s != null)
+        {
+            //Display health
+
+            if (s is Attacker)
             {
-                //Display resource
+                Attacker a = s as Attacker;
+                //display attack range
             }
-
-            // Tile is owned by the player
-            if (Selected.Owner == Manager.GetCurrentPlayer())
+            else if (s is Terrainer)
             {
-                if (s == null)
-                {
-                    //enable attacker and terrainer buy buttons
-                }
-                if (r != null)
-                {
-                    //enable collector buy button
-                }
+                //display terrain range
             }
+        }
+        //Tile has a resource on it
+        else if (r != null)
+        {
+            //Display resource
+        }
 
-            #region old code
-                /*
-                Structure s = Selected.GetStructure();
-                if (Selected.transform.childCount > 0)
-                {
-                    Resource r = Selected.transform.GetChild(0).GetComponent<Resource>();
-                    //Structure s = Selected.transform.GetChild(0).GetComponent<Resource>()
-                    if (r != null)
-                    {
-                        //Selected a resource tile
-                    }
-                    else //if ()
-                    {
-
-                    }
-                    /* resource
-                     * collector
-                     * spreader
-                     * attacker
-                     * other
-                     
-                }
-                */
-                #endregion
+        // Tile is owned by the player
+        if (Selected.Owner == Manager.GetCurrentPlayer())
+        {
+            if (s == null)
+            {
+                //enable attacker and terrainer buy buttons
+            }
+            if (r != null)
+            {
+                //enable collector buy button
+            }
         }
     }
 }

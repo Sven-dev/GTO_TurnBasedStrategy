@@ -120,7 +120,11 @@ public class Player : MonoBehaviour
 
     public void EndTurn()
     {
-        //SelectedTile.GetComponent<Renderer>().material.color = SelectedTile.Default.color;
+        if (SelectedTile != null)
+        {
+            SelectedTile.Deselect();
+        }
+
         SelectedTile = null;
         gameObject.SetActive(false);
     }

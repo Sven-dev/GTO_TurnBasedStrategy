@@ -15,7 +15,6 @@ public class BaseTree : Structure
         {
             r.Amount += this.Amount;
         }
-
     }
 
     public void AttachResources()
