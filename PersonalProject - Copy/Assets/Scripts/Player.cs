@@ -7,13 +7,20 @@ public class Player : MonoBehaviour
     public Grid grid;
     public UnitFactory BaseTree;
     public List<UnitFactory> structures;
+
+    [Space]
     public RootPlacer RootPlacer;
-    public Point BaseTile;
+    public Tile BaseTile;
 
     [HideInInspector]
     public Tile SelectedTile;
 
     public Color PlayerColor;
+    public List<Resource> Resources;
+
+    [Space]
+    public SliderContoller SliderContoller;
+    public VictoryController VictoryController;
 
     public delegate void NewTurn();
     public event NewTurn OnTurnChange;
@@ -37,6 +44,10 @@ public class Player : MonoBehaviour
         {
             Structure s = BaseTree.Buy();
             Place(s, SelectedTile);
+            BaseTile = SelectedTile;
+
+            BaseTree b = s as BaseTree;
+            b.GrowCost.resource = Resources[2];
 
             RootPlacer.SpawnAround(SelectedTile, this);
             DeselectTile();
@@ -127,5 +138,13 @@ public class Player : MonoBehaviour
 
         SelectedTile = null;
         gameObject.SetActive(false);
+    }
+
+    public void GrowTree()
+    {
+        BaseTree b = BaseTile.GetStructure() as BaseTree;
+        b.Grow();
+        SliderContoller.UpdateSlider(b.Growthcurrent);
+        VictoryController.CheckVictory(b);
     }
 }

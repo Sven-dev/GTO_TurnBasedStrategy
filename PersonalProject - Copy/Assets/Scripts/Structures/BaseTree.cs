@@ -6,8 +6,15 @@ public class BaseTree : Structure
 {
     public Grid Grid;
     public int Range;
+
+    [Space]
     public int Amount;
     public List<Resource> Resources;
+
+    [Space]
+    public int Growthcurrent;
+    public int GrowthMax;
+    public Cost GrowCost;
 
     public void CollectResources()
     {
@@ -43,5 +50,18 @@ public class BaseTree : Structure
         Owner.OnTurnChange += CollectResources;
 
         AttachResources();
+
+    }
+
+    public void Grow()
+    {
+        if (GrowCost.resource.Amount - GrowCost.cost >= 0)
+        {
+            GrowCost.resource.Change(-GrowCost.cost);
+            Growthcurrent += GrowCost.cost;
+            return;
+        }
+
+        print("You don't have enough " + GrowCost.resource.ToString());
     }
 }

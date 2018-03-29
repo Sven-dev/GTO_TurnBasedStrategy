@@ -111,3 +111,10 @@ MonoBehaviour:
   Owner: {fileID: 0}
   Grid: {fileID: 0}
   Range: 3
+  Amount: 0
+  Resources: []
+  Growthcurrent: 0
+  GrowthMax: 30
+  GrowCost:
+    resource: {fileID: 0}
+    cost: 5

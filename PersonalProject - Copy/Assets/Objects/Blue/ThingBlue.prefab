@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1074045215949994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 111.95077, y: 1.6654401, z: 99.37177}
+  m_LocalPosition: {x: 114.4067, y: 584.9328, z: 149.96643}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -111,3 +111,10 @@ MonoBehaviour:
   Owner: {fileID: 0}
   Grid: {fileID: 0}
   Range: 3
+  Amount: 0
+  Resources: []
+  Growthcurrent: 0
+  GrowthMax: 30
+  GrowCost:
+    resource: {fileID: 0}
+    cost: 5

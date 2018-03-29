@@ -16,23 +16,17 @@ public class Attacker : Structure
     public int Spread;
 
     public int Damage;
+    public bool Fired;
 
     public List<Tile> Tiles;
     public Grid Grid;
-
-	// Use this for initialization
-	void Start () {
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public override void StartUp(Player p, Grid g)
     {
         Owner = p;
         this.Grid = g;
+        Owner.OnTurnChange += ReloadWeapon;
+        ReloadWeapon();
         Tiles = Grid.GetRangeTiles(transform.parent.transform.GetComponent<Tile>(), MaxRange, Owner);
     }
 
@@ -52,10 +46,15 @@ public class Attacker : Structure
         }
     }
 
+    public void ReloadWeapon()
+    {
+        Fired = false;
+    }
+
     public void DealDamage(Structure target)
     {
         //Animation
         target.TakeDamage(Damage);
-        print("Dealing damage: " + gameObject.ToString());
+        Fired = true;
     }
 }
