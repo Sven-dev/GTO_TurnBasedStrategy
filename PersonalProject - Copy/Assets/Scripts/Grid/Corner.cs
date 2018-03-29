@@ -4,7 +4,23 @@ using UnityEngine;
 
 public class Corner : MonoBehaviour {
 
+    public Point Position;
     public List<Player> Ownership;
+
+    [HideInInspector]
+    public int GCost;
+
+    [HideInInspector]
+    public int HCost;
+
+    [HideInInspector]
+    public int FCost
+    {
+        get { return GCost + HCost; }
+    }
+
+    [HideInInspector]
+    public Corner Parent;
 
     public void AddOwnerShip(Player p)
     {
@@ -15,8 +31,9 @@ public class Corner : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
-		
+    void Start ()
+    {
+
 	}
 	
 	// Update is called once per frame

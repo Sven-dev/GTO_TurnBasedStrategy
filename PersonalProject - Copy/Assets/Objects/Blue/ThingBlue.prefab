@@ -110,7 +110,7 @@ MonoBehaviour:
   Health: 0
   Owner: {fileID: 0}
   Grid: {fileID: 0}
-  Range: 3
+  Range: 6
   Amount: 0
   Resources: []
   Growthcurrent: 0

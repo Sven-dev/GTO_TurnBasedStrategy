@@ -1045,6 +1045,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 722887926}
   Prefab: {fileID: 114729093034719456, guid: 30fc8e3652e8a1e4481ff2b356a1bf1a, type: 2}
+  PathFinder: {fileID: 722887933}
   Rootlist: []
 --- !u!114 &418945791
 MonoBehaviour:
@@ -1784,6 +1785,7 @@ GameObject:
   - component: {fileID: 722887926}
   - component: {fileID: 722887931}
   - component: {fileID: 722887932}
+  - component: {fileID: 722887933}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1810,6 +1812,7 @@ MonoBehaviour:
   - {fileID: 1800135446486214, guid: 408de90e660ba6446b4c38708a2f3fa4, type: 2}
   Length: 15
   Width: 15
+  PathFinder: {fileID: 0}
 --- !u!81 &722887927
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1900,6 +1903,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Manager: {fileID: 722887931}
+--- !u!114 &722887933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 722887925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfb0310934218944997da3cb143ac60e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &723624233
 GameObject:
   m_ObjectHideFlags: 0
@@ -2289,6 +2303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 722887926}
   Prefab: {fileID: 114859658875744612, guid: d72eb6e3fd80e7840bce2324734eab9f, type: 2}
+  PathFinder: {fileID: 722887933}
   Rootlist: []
 --- !u!114 &825016873
 MonoBehaviour:

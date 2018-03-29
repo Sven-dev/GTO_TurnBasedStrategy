@@ -61,6 +61,7 @@ public class Player : MonoBehaviour
             Structure s = structures[index].Buy();
             Place(s, SelectedTile);
 
+            RootPlacer.PathFind(SelectedTile, this);
             RootPlacer.SpawnAround(SelectedTile, this);
             DeselectTile();
         }

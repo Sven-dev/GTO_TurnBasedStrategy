@@ -28,6 +28,7 @@ public class Grid : MonoBehaviour
     [Space(10)]
     public Tile[,] TileArray;
     public Corner[,] CornerArray;
+    public PathFinder PathFinder;
 
     // Use this for initialization
     void Start()
@@ -63,6 +64,7 @@ public class Grid : MonoBehaviour
             for (int y = 0; y < Width + 1; y++)
             {
                 CornerArray[x, y] = Instantiate(Corner, new Vector3(x * 10 - 5, 0.1f, y * 10 - 5), Quaternion.identity, Corners.transform);
+                CornerArray[x, y].Position = new Point(x, y);
             }
         }
     }
@@ -79,6 +81,84 @@ public class Grid : MonoBehaviour
                 Instantiate(g, t.transform.position + Vector3.up, Quaternion.identity, t.transform);
             }
         }
+    }
+
+    public List<Corner> GetCornerNeighbours(Corner c)
+    {
+        List<Corner> neighbours = new List<Corner>();
+        if (c.Position.X +1< Length +1)
+        {
+            neighbours.Add(CornerArray[c.Position.X + 1, c.Position.Y]);
+        }
+
+        if (c.Position.X - 1 >= 0)
+        {
+            neighbours.Add(CornerArray[c.Position.X - 1, c.Position.Y]);
+        }
+
+        if (c.Position.Y + 1 < Width + 1)
+        {
+            neighbours.Add(CornerArray[c.Position.X, c.Position.Y + 1]);
+        }
+
+        if (c.Position.Y - 1 >= 0)
+        {
+            neighbours.Add(CornerArray[c.Position.X, c.Position.Y - 1]);
+        }
+
+        return neighbours;
+    }
+
+    
+    public List<Corner> GetBuildingCorners(Player p, Structure excludedStructure)
+    {
+        List<Corner> CornerList = new List<Corner>();
+        foreach(Tile t in TileArray)
+        {
+            Structure s = t.GetComponentInChildren<Structure>();
+            if (t.Owner == p && s != null && s != excludedStructure)
+            {
+                Corner[,] temp = GetCorners(t);
+                foreach (Corner c in temp)
+                {
+                    CornerList.Add(c);
+                }
+            }
+        }
+
+        return CornerList;
+    }
+    
+
+
+    public Corner[,] GetCorners(Tile t)
+    {
+        return new Corner[,]
+        {
+            { CornerArray[t.Position.X, t.Position.Y], CornerArray[t.Position.X + 1, t.Position.Y] },
+            { CornerArray[t.Position.X, t.Position.Y +1],CornerArray[t.Position.X + 1, t.Position.Y + 1] }
+        };
+    }
+
+    public Corner GetClosestBuilding(Corner start)
+    {
+        Corner closestCorner = null;
+        int closestDist = int.MaxValue;
+        foreach (Corner c in CornerArray)
+        {
+            Root r = c.GetComponentInChildren<Root>();
+            if (r != null)
+            {
+                int dist = PathFinder.GuessDistance(start, c);
+                if (dist < closestDist)
+                {
+                    closestDist = dist;
+                    closestCorner = c;
+                }
+            }
+        }
+
+        return closestCorner;
     }
 
     public Point GetFreeTilePos()
