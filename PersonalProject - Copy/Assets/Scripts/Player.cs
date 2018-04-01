@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     public RootPlacer RootPlacer;
     public Tile BaseTile;
 
-    [HideInInspector]
     public Tile SelectedTile;
 
     public Color PlayerColor;
@@ -31,39 +30,31 @@ public class Player : MonoBehaviour
     {
         RootPlacer.grid = this.grid;
 	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
 
     public void PlaceStartingTree()
     {
         if (SelectedTile != null)
         {
-            Structure s = BaseTree.Buy();
-            Place(s, SelectedTile);
+            BaseTree b = structures[0].Buy() as BaseTree;
+            b = Place(b, SelectedTile) as BaseTree;
+
             BaseTile = SelectedTile;
-
-            BaseTree b = s as BaseTree;
             b.GrowCost.resource = Resources[2];
-
-            RootPlacer.SpawnAround(SelectedTile, this);
-            DeselectTile();
         }
     }
 
     public void GetThing(int index)
     {
-        if (SelectedTile != null && SelectedTile.transform.childCount == 0 && SelectedTile.Owner == this)
+        if (SelectedTile != null && SelectedTile.GetComponentInChildren<Structure>() == null && SelectedTile.Owner == this)
         {
             Structure s = structures[index].Buy();
-            Place(s, SelectedTile);
+            s = Place(s, SelectedTile);
 
-            RootPlacer.PathFind(SelectedTile, this);
-            RootPlacer.SpawnAround(SelectedTile, this);
-            DeselectTile();
+            Tile start = RootPlacer.GetClosestTile(SelectedTile, this);
+            Structure Parent = start.GetComponentInChildren<Structure>();
+            Parent.Children.Add(s);
+
+            s.Roots.AddRange(RootPlacer.GetClosestPath(start, SelectedTile, this));
         }
     }
 
@@ -75,23 +66,17 @@ public class Player : MonoBehaviour
             Structure building = SelectedTile.GetComponentInChildren<Structure>();
             if (spot != null && building == null)
             {
-                Structure s = null;
                 switch (spot.Type)
                 {
                     case ResourceType.Water:
-                        s = structures[2].Buy();
+                        GetThing(2);
                         break;
                     case ResourceType.co2:
-                        s = structures[3].Buy();
+                        GetThing(3);
                         break;
                     case ResourceType.Solar:
-                        s = structures[4].Buy();
+                        GetThing(4);
                         break;
-                }
-
-                if (s != null)
-                {
-                    Place(s, SelectedTile);
                 }
             }
         }
@@ -103,10 +88,12 @@ public class Player : MonoBehaviour
     }
 
     //Instantiates a structure on a tile
-    public void Place(Structure s, Tile t)
+    public Structure Place(Structure s, Tile t)
     {
         s = Instantiate(s, t.transform.position, Quaternion.identity, t.transform);
         s.StartUp(this, grid);
+        s.Roots = RootPlacer.SpawnAround(SelectedTile, this);
+        return s;
     }
 
     public void SelectTile(Tile t)
@@ -118,6 +105,7 @@ public class Player : MonoBehaviour
     public void DeselectTile()
     {
         SelectedTile.Deselect();
+        SelectedTile = null;
     }
 
     public void StartTurn()
@@ -144,8 +132,11 @@ public class Player : MonoBehaviour
     public void GrowTree()
     {
         BaseTree b = BaseTile.GetStructure() as BaseTree;
-        b.Grow();
-        SliderContoller.UpdateSlider(b.Growthcurrent);
-        VictoryController.CheckVictory(b);
+        if (b != null)
+        {
+            b.Grow();
+            SliderContoller.UpdateSlider(b.Growthcurrent);
+            VictoryController.CheckVictory(b);
+        }
     }
 }

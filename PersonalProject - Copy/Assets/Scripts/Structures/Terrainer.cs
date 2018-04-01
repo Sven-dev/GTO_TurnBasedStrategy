@@ -6,10 +6,10 @@ public class Terrainer : Structure
 {
     public Grid Grid;
     public int Range;
+    public List<Tile> tiles;
 
     public void ConvertTiles()
     {
-        List<Tile> tiles = Grid.GetRangeTiles(transform.parent.transform.GetComponent<Tile>(), Range, Owner);
         foreach (Tile t in tiles)
         {
             t.SetOwner(Owner);
@@ -20,7 +20,7 @@ public class Terrainer : Structure
     {
         Owner = p;
         this.Grid = g;
-
+        tiles = Grid.GetRangeTiles(transform.parent.transform.GetComponent<Tile>(), Range, Owner);
         ConvertTiles();
     }
 }

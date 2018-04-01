@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Root : MonoBehaviour
 {
+    public int test;
     // Use this for initialization
-    void Start()
+    void Awake()
     {
-
+        test = 1;
     }
 
     // Update is called once per frame

@@ -109,6 +109,20 @@ public class Grid : MonoBehaviour
         return neighbours;
     }
 
+    public List<Tile> GetBuildings(Player p, Structure excludedStructure)
+    {
+        List<Tile> StructureList = new List<Tile>();
+        foreach (Tile t in TileArray)
+        {
+            Structure s = t.GetComponentInChildren<Structure>();
+            if (s != null && t.Owner == p && s != excludedStructure)
+            {
+                StructureList.Add(t);
+            }
+        }
+
+        return StructureList;
+    }
     
     public List<Corner> GetBuildingCorners(Player p, Structure excludedStructure)
     {
@@ -116,7 +130,7 @@ public class Grid : MonoBehaviour
         foreach(Tile t in TileArray)
         {
             Structure s = t.GetComponentInChildren<Structure>();
-            if (t.Owner == p && s != null && s != excludedStructure)
+            if (s != null && t.Owner == p && s != excludedStructure)
             {
                 Corner[,] temp = GetCorners(t);
                 foreach (Corner c in temp)
@@ -231,6 +245,33 @@ public class Grid : MonoBehaviour
         return null;
     }
 
+    public List<Tile> GetRangeTiles(Tile tile, int range)
+    {
+        List<Tile> rangetiles = new List<Tile>();
+        rangetiles.Add(TileArray[tile.Position.X, tile.Position.Y]);
+
+        //counts down range
+        for (int i = range; i > 0; i--)
+        {
+            List<Tile> TempList = new List<Tile>();
+            foreach (Tile t in rangetiles)
+            {
+                //Get each tile around the tile, if tile is not in list already, add it.
+                foreach (Tile t2 in GetTilesAround(t))
+                {
+                    if (!rangetiles.Contains(t2))
+                    {
+                        TempList.Add(t2);
+                    }
+                }
+            }
+
+            rangetiles.AddRange(TempList);
+        }
+
+        return rangetiles;
+    }
+
     public List<Tile> GetRangeTiles(Tile tile, int range, Player player)
     {
         List<Tile> rangetiles = new List<Tile>();
@@ -243,42 +284,48 @@ public class Grid : MonoBehaviour
             foreach (Tile t in rangetiles)
             {
                 //Get each tile around the tile, if tile is not in list already, add it.
-                if (t.Position.X + 1 < Length)
+                foreach (Tile t2 in GetTilesAround(t))
                 {
-                    if (!rangetiles.Contains(TileArray[t.Position.X + 1, t.Position.Y]))
+                    if (t2.Owner == player || t2.Owner == null)
                     {
-                        TempList.Add(TileArray[t.Position.X + 1, t.Position.Y]);
-                    }
-                }
-
-                if (t.Position.X - 1 >= 0)
-                {
-                    if (!rangetiles.Contains(TileArray[t.Position.X - 1, t.Position.Y]))
-                    {
-                        TempList.Add(TileArray[t.Position.X - 1, t.Position.Y]);
-                    }
-                }
-
-                if (t.Position.Y + 1 < Width)
-                {
-                    if (!rangetiles.Contains(TileArray[t.Position.X, t.Position.Y + 1]))
-                    {
-                        TempList.Add(TileArray[t.Position.X, t.Position.Y + 1]);
-                    }
-                }
-
-                if (t.Position.Y - 1 >= 0)
-                {
-                    if (!rangetiles.Contains(TileArray[t.Position.X, t.Position.Y - 1]))
-                    {
-                        TempList.Add(TileArray[t.Position.X, t.Position.Y - 1]);
+                        if (!rangetiles.Contains(t2))
+                        {
+                            TempList.Add(t2);
+                        }
                     }
                 }
             }
 
-            rangetiles.AddRange(TempList);          
+            rangetiles.AddRange(TempList);
         }
 
         return rangetiles;
+    }
+
+    public List<Tile> GetTilesAround(Tile t)
+    {
+        List<Tile> tiles = new List<Tile>();
+        //Get each tile around the tile.
+        if (t.Position.X + 1 < Length)
+        {
+            tiles.Add(TileArray[t.Position.X + 1, t.Position.Y]);
+        }
+
+        if (t.Position.X - 1 >= 0)
+        {
+            tiles.Add(TileArray[t.Position.X - 1, t.Position.Y]);
+        }
+
+        if (t.Position.Y + 1 < Width)
+        {
+            tiles.Add(TileArray[t.Position.X, t.Position.Y + 1]);
+        }
+
+        if (t.Position.Y - 1 >= 0)
+        {
+            tiles.Add(TileArray[t.Position.X, t.Position.Y - 1]);
+        }
+
+        return tiles;
     }
 }

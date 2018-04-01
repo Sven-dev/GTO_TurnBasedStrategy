@@ -59,7 +59,7 @@ public class RaycastClicker : MonoBehaviour {
         Structure defender = Selected.GetStructure();
 
         //Check if selected tile is an attacker                   
-        if (attacker != null)
+        if (attacker != null && defender != null)
         {
             if (attacker is Attacker)
             {

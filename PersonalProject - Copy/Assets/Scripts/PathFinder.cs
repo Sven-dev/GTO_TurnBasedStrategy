@@ -76,6 +76,19 @@ public class PathFinder : MonoBehaviour
         return 14 * distX + 10 * (distY - distX);
     }
 
+    public int GuessDistance(Tile A, Tile B)
+    {
+        int distX = Mathf.Abs(A.Position.X - B.Position.X);
+        int distY = Mathf.Abs(A.Position.Y - B.Position.Y);
+
+        if (distX > distY)
+        {
+            return 14 * distY + 10 * (distX - distY);
+        }
+
+        return 14 * distX + 10 * (distY - distX);
+    }
+
     List<Corner> RetracePath(Corner start, Corner end)
     {
         List<Corner> path = new List<Corner>();
@@ -84,7 +97,6 @@ public class PathFinder : MonoBehaviour
 
         while (currentCorner != start)
         {
-            Debug.Log("Parent: " + currentCorner.Parent);
             path.Add(currentCorner);
             currentCorner = currentCorner.Parent;
         }

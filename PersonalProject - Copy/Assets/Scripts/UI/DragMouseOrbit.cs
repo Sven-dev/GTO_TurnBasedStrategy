@@ -16,6 +16,10 @@ public class DragMouseOrbit : MonoBehaviour
     float rotationXAxis = 0.0f;
     float velocityX = 0.0f;
     float velocityY = 0.0f;
+
+    public delegate void Move();
+    public event Move OnMove;
+
     // Use this for initialization
     void Start()
     {
@@ -32,6 +36,7 @@ public class DragMouseOrbit : MonoBehaviour
                 velocityX += xSpeed * Input.GetAxis("Mouse X") * distance * 0.02f;
                 velocityY += ySpeed * Input.GetAxis("Mouse Y") * 0.02f;
             }
+
             rotationYAxis += velocityX;
             rotationXAxis -= velocityY;
             rotationXAxis = ClampAngle(rotationXAxis, yMinLimit, yMaxLimit);

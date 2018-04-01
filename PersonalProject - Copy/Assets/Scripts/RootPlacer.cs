@@ -21,7 +21,7 @@ public class RootPlacer : Placer {
 		
 	}
 
-    public void SpawnAround(Tile t, Player p)
+    public List<Root> SpawnAround(Tile t, Player p)
     {
         Corner[,] corners = grid.GetCorners(t);
 
@@ -30,10 +30,14 @@ public class RootPlacer : Placer {
             c.AddOwnerShip(p);
         }
 
-        SpawnRoot(corners[0, 0], corners[0, 1]);
-        SpawnRoot(corners[0, 1], corners[1, 1]);
-        SpawnRoot(corners[1, 1], corners[1, 0]);
-        SpawnRoot(corners[1, 0], corners[0, 0]);
+        List<Root> roots = new List<Root>();
+
+        roots.Add(SpawnRoot(corners[0, 0], corners[0, 1]));
+        roots.Add(SpawnRoot(corners[0, 1], corners[1, 1]));
+        roots.Add(SpawnRoot(corners[1, 1], corners[1, 0]));
+        roots.Add(SpawnRoot(corners[1, 0], corners[0, 0]));
+
+        return roots;
     }
 
     public Root SpawnRoot(Corner tile1, Corner tile2)
@@ -46,9 +50,29 @@ public class RootPlacer : Placer {
         return r;
     }
 
-    public void PathFind(Tile end, Player p)
+    public Tile GetClosestTile(Tile end, Player p)
     {
-        List<Corner> startCorners = grid.GetBuildingCorners(p, end.GetComponentInChildren<Structure>());
+        List<Tile> buildings = grid.GetBuildings(p, end.GetComponentInChildren<Structure>());
+        int smallestDist = int.MaxValue;
+        Tile closest = null;
+
+
+        foreach (Tile t in buildings)
+        {
+            int i = PathFinder.GuessDistance(t, end);
+            if (i < smallestDist)
+            {
+                smallestDist = i;
+                closest = t;
+            }
+        }
+
+        return closest;
+    }
+
+    public List<Root> GetClosestPath(Tile start, Tile end, Player p)
+    {
+        Corner[,] startCorners = grid.GetCorners(start);
         Corner[,] endCorners = grid.GetCorners(end);
 
         int smallestDist = int.MaxValue;
@@ -71,17 +95,20 @@ public class RootPlacer : Placer {
 
         if (smallestStart != null && smallestEnd != null)
         {
-            print(smallestStart.Position.X + ", " + smallestStart.Position.Y);
-            print(smallestEnd.Position.X + ", " + smallestEnd.Position.Y);
             List<Corner> path = PathFinder.FindPath(smallestStart, smallestEnd, p);
-            print(path.Count);
+            List<Root> roots = new List<Root>();
+
             for (int i = 0; i < path.Count; i++)
             {
                 if (i + 1 < path.Count)
                 {
-                    SpawnRoot(path[i], path[i + 1]);
+                    roots.Add(SpawnRoot(path[i], path[i + 1]));
                 }
             }
+
+            return roots;
         }
+
+        return null;
     }
 }
