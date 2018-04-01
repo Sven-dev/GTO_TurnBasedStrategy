@@ -44,7 +44,7 @@ public class RootPlacer : Placer {
     {
         Root r = Instantiate(Prefab, tile1.transform.position, Quaternion.identity, tile1.transform);
 
-        r.SetRotation(tile1.transform.position, tile2.transform.position);
+        r.SetRotation(tile1.Position, tile2.Position);
         r.SetPosition(tile1.transform.position, tile2.transform.position);
 
         return r;

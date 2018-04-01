@@ -4,19 +4,7 @@ using UnityEngine;
 
 public class Root : MonoBehaviour
 {
-    public int test;
-    // Use this for initialization
-    void Awake()
-    {
-        test = 1;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    //Sets the position of a root between 2 points
     public void SetPosition(Vector3 start, Vector3 end)
     {
         var dir = end - start;
@@ -24,33 +12,40 @@ public class Root : MonoBehaviour
         transform.position = mid;
     }
     
-    public void SetRotation(Vector3 start, Vector3 end)
+    //turns the root the right way between 2 points
+    public void SetRotation(Point start, Point end)
     {
         Vector2 rotation = new Vector2();
-
-        if (end.x != start.x)
+        print("Start: " + start.X + ", " + start.Y);
+        print("End: " + end.X + ", " + end.Y);
+        if (end.X != start.X)
         {
-            if (end.x < start.x)
+            if (end.X < start.X)
             {
-                rotation = new Vector2(0, 0); //Left
+                rotation = new Vector2(-90, -90); //Left
             }
             else //if (end.x > start.x)
             {
-                rotation = new Vector2(0, 180); //Right
+                rotation = new Vector2(-90, 90); //Right
             }
         }
         else //if(end.y != start.y )
         {
-            if (end.y < start.y)
+            if (end.Y < start.Y)
             {
-                rotation = new Vector2(0, 270); //Up
+                rotation = new Vector2(-90, 180); //Up
             }
             else //if (end.y > start.y)
             {
-                rotation = new Vector2(0, 90); //Down
+                rotation = new Vector2(-90, 0); //Down
             }
         }
 
         transform.Rotate(rotation);
+    }
+
+    public void DestroyRoot()
+    {
+        Destroy(this.gameObject);
     }
 }

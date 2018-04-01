@@ -49,9 +49,22 @@ public abstract class Structure : MonoBehaviour {
 
     public void DestroyStructure()
     {
+        foreach(Structure s in Children)
+        {
+            if (s != null)
+            {
+                s.DestroyStructure();
+            }
+        }
+
         foreach (Root r in Roots)
         {
-            Destroy(r);
+            if (r != null)
+            {
+                r.DestroyRoot();
+            }
         }
+
+        Destroy(this.gameObject);
     }
 }

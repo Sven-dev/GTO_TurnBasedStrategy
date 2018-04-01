@@ -59,6 +59,7 @@ public class BaseTree : Structure
         {
             GrowCost.resource.Change(-GrowCost.cost);
             Growthcurrent += GrowCost.cost;
+            transform.localScale += new Vector3(0.75f, 0.75f, 0.75f);
             return;
         }
 
