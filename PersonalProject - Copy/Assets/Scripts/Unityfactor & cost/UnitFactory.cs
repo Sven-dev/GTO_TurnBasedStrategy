@@ -15,6 +15,7 @@ public class UnitFactory : MonoBehaviour
             if (c.resource.Amount - c.cost < 0)
             {
                 affordable = false;
+                c.resource.Insufficient();
                 print("You don't have enough " + c.resource.name);
             }           
         }

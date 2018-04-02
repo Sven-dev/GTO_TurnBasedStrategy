@@ -48,13 +48,16 @@ public class Player : MonoBehaviour
         if (SelectedTile != null && SelectedTile.GetComponentInChildren<Structure>() == null && SelectedTile.Owner == this)
         {
             Structure s = structures[index].Buy();
-            s = Place(s, SelectedTile);
+            if (s != null)
+            {
+                s = Place(s, SelectedTile);
 
-            Tile start = RootPlacer.GetClosestTile(SelectedTile, this);
-            Structure Parent = start.GetComponentInChildren<Structure>();
-            Parent.Children.Add(s);
+                Tile start = RootPlacer.GetClosestTile(SelectedTile, this);
+                Structure Parent = start.GetComponentInChildren<Structure>();
+                Parent.Children.Add(s);
 
-            s.Roots.AddRange(RootPlacer.GetClosestPath(start, SelectedTile, this));
+                s.Roots.AddRange(RootPlacer.GetClosestPath(start, SelectedTile, this));
+            }
         }
     }
 
