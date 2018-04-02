@@ -47,6 +47,8 @@ public class RootPlacer : Placer {
         r.SetRotation(tile1.Position, tile2.Position);
         r.SetPosition(tile1.transform.position, tile2.transform.position);
 
+        StartCoroutine(r._turnAround());
+
         return r;
     }
 

@@ -16,28 +16,26 @@ public class Root : MonoBehaviour
     public void SetRotation(Point start, Point end)
     {
         Vector2 rotation = new Vector2();
-        print("Start: " + start.X + ", " + start.Y);
-        print("End: " + end.X + ", " + end.Y);
         if (end.X != start.X)
         {
             if (end.X < start.X)
             {
-                rotation = new Vector2(-90, -90); //Left
+                rotation = new Vector3(90, -90); //Left
             }
             else //if (end.x > start.x)
             {
-                rotation = new Vector2(-90, 90); //Right
+                rotation = new Vector3(90, 90); //Right
             }
         }
         else //if(end.y != start.y )
         {
             if (end.Y < start.Y)
             {
-                rotation = new Vector2(-90, 180); //Up
+                rotation = new Vector3(90, 180); //Up
             }
             else //if (end.y > start.y)
             {
-                rotation = new Vector2(-90, 0); //Down
+                rotation = new Vector3(90, 0); //Down
             }
         }
 
@@ -46,9 +44,11 @@ public class Root : MonoBehaviour
 
     public IEnumerator _turnAround()
     {
-        while (transform.rotation.z > -180)
+        Transform mesh = transform.GetChild(0);
+        
+        while (mesh.eulerAngles.x <= 90 || mesh.eulerAngles.x >= 280)
         {
-            transform.Rotate(Vector3.back * Time.deltaTime);
+            mesh.Rotate(Vector3.right * 100 * Time.deltaTime);
             yield return null;
         }
     }

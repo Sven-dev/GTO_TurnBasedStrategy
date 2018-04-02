@@ -90,7 +90,8 @@ public class Player : MonoBehaviour
     //Instantiates a structure on a tile
     public Structure Place(Structure s, Tile t)
     {
-        s = Instantiate(s, t.transform.position - new Vector3(0, -5, 0), Quaternion.identity, t.transform);
+        s = Instantiate(s, t.transform.position + new Vector3(0, -5, 0), Quaternion.identity, t.transform);
+        StartCoroutine(_place(s));
         s.StartUp(this, grid);
         s.Roots = RootPlacer.SpawnAround(SelectedTile, this);
         return s;
@@ -98,15 +99,9 @@ public class Player : MonoBehaviour
 
     IEnumerator _place(Structure s)
     {
-        while (s.transform.position.y < 3)
+        while (s.transform.position.y < 0)
         {
-            s.transform.Translate(Vector3.up * Time.deltaTime);
-            yield return null;
-        }
-
-        while (s.transform.position.y > 0)
-        {
-            s.transform.Translate(Vector3.down * Time.deltaTime);
+            s.transform.Translate(Vector3.up * 3 * Time.deltaTime);
             yield return null;
         }
 
