@@ -44,6 +44,15 @@ public class Root : MonoBehaviour
         transform.Rotate(rotation);
     }
 
+    public IEnumerator _turnAround()
+    {
+        while (transform.rotation.z > -180)
+        {
+            transform.Rotate(Vector3.back * Time.deltaTime);
+            yield return null;
+        }
+    }
+
     public void DestroyRoot()
     {
         Destroy(this.gameObject);
