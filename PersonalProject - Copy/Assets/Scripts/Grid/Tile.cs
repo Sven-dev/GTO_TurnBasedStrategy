@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Tile : MonoBehaviour {
@@ -11,6 +10,9 @@ public class Tile : MonoBehaviour {
     public bool Selected;
     private Renderer r;
 
+    /// <summary>
+    /// Returns the color of the owner, or the default color if owner is null
+    /// </summary>
     public Color Color
     {
         get
@@ -32,12 +34,19 @@ public class Tile : MonoBehaviour {
         Selected = false;
     }
 
+    /// <summary>
+    /// Sets the owner back to null
+    /// </summary>
     public void SetNeutral()
     {
         Owner = null;
         r.material.color = Default;
     }
 
+    /// <summary>
+    /// Sets the owner to p
+    /// </summary>
+    /// <param name="p">The player who gained ownership</param>
     public void SetOwner(Player p)
     {
         if (Owner == null)
@@ -47,6 +56,9 @@ public class Tile : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Selects the tile
+    /// </summary>
     public void Select()
     {
         Selected = true;
@@ -59,6 +71,9 @@ public class Tile : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Deselects the tile
+    /// </summary>
     public void Deselect()
     {
         Selected = false;
@@ -70,7 +85,9 @@ public class Tile : MonoBehaviour {
         }
     }
 
-    //Pulsates the tile if selected
+    /// <summary>
+    /// Pulsates the tile while selected
+    /// </summary>
     IEnumerator _select()
     {
         float t = 0;
@@ -108,14 +125,11 @@ public class Tile : MonoBehaviour {
         }
     }
 
-    //Checks what structure is on the tile, and returns it
+    /// <summary>
+    /// Checks what structure is on the tile, and returns it
+    /// </summary>
     public Structure GetStructure()
     {
         return transform.GetComponentInChildren<Structure>();
-    }
-
-    public Resource GetResource()
-    {
-        return GetComponentInChildren<Resource>();
     }
 }

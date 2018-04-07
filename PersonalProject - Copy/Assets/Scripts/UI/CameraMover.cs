@@ -28,6 +28,11 @@ public class CameraMover : MonoBehaviour {
             Move(Vector3.right);
         }
     }
+
+    /// <summary>
+    /// Moves the object in a direction
+    /// </summary>
+    /// <param name="dir">The direction given</param>
     void Move(Vector3 dir)
     {
         transform.Translate(dir * Speed * Time.deltaTime);

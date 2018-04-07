@@ -14,6 +14,9 @@ public class PlayerManager : MonoBehaviour {
         NextTurn();
 	}
 
+    /// <summary>
+    /// Ends the turn of the current player, and starts the turn of the next player in line
+    /// </summary>
     public void NextTurn()
     {
         PlayerList[CurrentPlayer].EndTurn();
@@ -26,11 +29,19 @@ public class PlayerManager : MonoBehaviour {
         PlayerList[CurrentPlayer].StartTurn();
     }
 
+    /// <summary>
+    /// Returns the player currently playing
+    /// </summary>
+    /// <returns></returns>
     public Player GetCurrentPlayer()
     {
         return PlayerList[CurrentPlayer];
     }
 
+    /// <summary>
+    /// Selects t
+    /// </summary>
+    /// <param name="t">The tile that needs to be selected</param>
     public void SelectTile(Tile t)
     {
         if (PlayerList[CurrentPlayer].SelectedTile != null)

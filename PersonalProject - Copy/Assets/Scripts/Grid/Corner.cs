@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Corner : MonoBehaviour {
-
+public class Corner : MonoBehaviour
+{
     public Point Position;
     public List<Player> Ownership;
 
@@ -22,6 +21,10 @@ public class Corner : MonoBehaviour {
     [HideInInspector]
     public Corner Parent;
 
+    /// <summary>
+    /// Adds a player to the list of owners
+    /// </summary>
+    /// <param name="p"> the player that needs to be added</param>
     public void AddOwnerShip(Player p)
     {
         if (!Ownership.Contains(p))
@@ -29,15 +32,4 @@ public class Corner : MonoBehaviour {
             Ownership.Add(p);
         }
     }
-
-    // Use this for initialization
-    void Start ()
-    {
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

@@ -19,6 +19,10 @@ public class Resource : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Changes the amount of resource available
+    /// </summary>
+    /// <param name="Cost">The amount that needs to change</param>
     public void Change(int Cost)
     {
         Amount += Cost;
@@ -28,6 +32,9 @@ public class Resource : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// triggers an eventhandler if there isn't enough resource
+    /// </summary>
     public void Insufficient()
     {
         OnNotEnough();

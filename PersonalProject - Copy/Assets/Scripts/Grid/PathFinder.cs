@@ -11,6 +11,12 @@ public class PathFinder : MonoBehaviour
         Grid = GetComponent<Grid>();
     }
 
+    /// <summary>
+    /// Finds the shortest route between 2 corners through corners that are owned by player
+    /// </summary>
+    /// <param name="start">The start of the path</param>
+    /// <param name="end">The end of the path</param>
+    /// <param name="p">The player the corners must belong to</param>
     public List<Corner> FindPath(Corner start, Corner end, Player p)
     {
         List<Corner> OpenSet = new List<Corner>();
@@ -61,6 +67,11 @@ public class PathFinder : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Returns the distance between 2 Corners
+    /// </summary>
+    /// <param name="A"></param>
+    /// <param name="B"></param>
     public int GuessDistance(Corner A, Corner B)
     {
         int distX = Mathf.Abs(A.Position.X - B.Position.X);
@@ -74,6 +85,11 @@ public class PathFinder : MonoBehaviour
         return 14 * distX + 10 * (distY - distX);
     }
 
+    /// <summary>
+    /// Returns the distance between 2 Tiles
+    /// </summary>
+    /// <param name="A">A</param>
+    /// <param name="B">B</param>
     public int GuessDistance(Tile A, Tile B)
     {
         int distX = Mathf.Abs(A.Position.X - B.Position.X);
@@ -87,6 +103,11 @@ public class PathFinder : MonoBehaviour
         return 14 * distX + 10 * (distY - distX);
     }
 
+    /// <summary>
+    /// Retraces the shortest path, returns a list of corners
+    /// </summary>
+    /// <param name="start">The start of the path</param>
+    /// <param name="end">The end of the path</param>
     List<Corner> RetracePath(Corner start, Corner end)
     {
         List<Corner> path = new List<Corner>();

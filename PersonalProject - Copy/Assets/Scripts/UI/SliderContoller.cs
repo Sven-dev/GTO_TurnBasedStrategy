@@ -12,6 +12,10 @@ public class SliderContoller : MonoBehaviour {
         s = GetComponent<Slider>();
 	}
 
+    /// <summary>
+    /// Updates the progress of the slider
+    /// </summary>
+    /// <param name="v">The value</param>
     public void UpdateSlider(int v)
     {
         s.value = v;

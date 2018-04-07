@@ -7,6 +7,11 @@ public class Point
     public int X;
     public int Y;
 
+    /// <summary>
+    /// Creates a 2 dimentional coordinate, used because Vector2 is not nullable
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
     public Point(int x, int y)
     {
         X = x;
@@ -37,7 +42,9 @@ public class Grid : MonoBehaviour
         AddResources();
     }
 
-    //Spawns the field tile and corner prefabs for the length and width given.
+    /// <summary>
+    /// Spawns the field tile and corner prefabs for the length and width given.
+    /// </summary>
     void SpawnGrid()
     {
         GameObject Field = new GameObject("Field");
@@ -69,7 +76,9 @@ public class Grid : MonoBehaviour
         }
     }
 
-    //Adds resources to the grid, based on how large it is.
+    /// <summary>
+    /// Adds resources to the grid, based on how large it is.
+    /// </summary>
     public void AddResources()
     {
         int amount = Length * Width / 10 / Resources.Count;
@@ -83,6 +92,10 @@ public class Grid : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Returns the 4 corners ajacent to c
+    /// </summary>
+    /// <param name="c">the corner</param>
     public List<Corner> GetCornerNeighbours(Corner c)
     {
         List<Corner> neighbours = new List<Corner>();
@@ -109,6 +122,11 @@ public class Grid : MonoBehaviour
         return neighbours;
     }
 
+    /// <summary>
+    /// Returns a list of all Tiles with buildings
+    /// </summary>
+    /// <param name="p">The player the buildings belong to</param>
+    /// <param name="excludedStructure">The structure that shouldn't be returned</param>
     public List<Tile> GetBuildings(Player p, Structure excludedStructure)
     {
         List<Tile> StructureList = new List<Tile>();
@@ -123,7 +141,12 @@ public class Grid : MonoBehaviour
 
         return StructureList;
     }
-    
+
+    /// <summary>
+    /// Returns a list of all corners of tiles with buildings on them
+    /// </summary>
+    /// <param name="p">The player the building belongs to</param>
+    /// <param name="excludedStructure">The structure that shouldn't be returned</param>
     public List<Corner> GetBuildingCorners(Player p, Structure excludedStructure)
     {
         List<Corner> CornerList = new List<Corner>();
@@ -143,6 +166,10 @@ public class Grid : MonoBehaviour
         return CornerList;
     }
     
+    /// <summary>
+    /// Returns the 4 corners of a tile
+    /// </summary>
+    /// <param name="t"></param>
     public Corner[,] GetCorners(Tile t)
     {
         return new Corner[,]
@@ -152,6 +179,10 @@ public class Grid : MonoBehaviour
         };
     }
 
+    /// <summary>
+    /// Finds and returns the closest corner to start
+    /// </summary>
+    /// <param name="start">The starting corner</param>
     public Corner GetClosestBuilding(Corner start)
     {
         Corner closestCorner = null;
@@ -173,6 +204,9 @@ public class Grid : MonoBehaviour
         return closestCorner;
     }
 
+    /// <summary>
+    /// Returns the coordinates of random tile with nothing on it
+    /// </summary>
     public Point GetFreeTilePos()
     {
         List<Tile> FreeTiles = new List<Tile>();
@@ -204,6 +238,9 @@ public class Grid : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Returns a random tile with nothing on it
+    /// </summary>
     public Tile GetFreeTile()
     {
         List<Tile> FreeTiles = new List<Tile>();
@@ -226,6 +263,10 @@ public class Grid : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Converts a tile into a coordinate. Returns a Point
+    /// </summary>
+    /// <param name="t">The tile that needs to be converted</param>
     public Point TileToPoint(Tile t)
     {
         for (int x = 0; x < Length; x++)
@@ -243,6 +284,11 @@ public class Grid : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Returns a list of tiles that are in range of the given tile
+    /// </summary>
+    /// <param name="tile">The given tile</param>
+    /// <param name="range">The furthest distance the tile has access to</param>
     public List<Tile> GetRangeTiles(Tile tile, int range)
     {
         List<Tile> rangetiles = new List<Tile>();
@@ -270,6 +316,12 @@ public class Grid : MonoBehaviour
         return rangetiles;
     }
 
+    /// <summary>
+    /// Returns a list of tiles that are in range of the given tile, but only if the tiles are owned by player
+    /// </summary>
+    /// <param name="tile">The given tile</param>
+    /// <param name="range">The furthest distance the tile has access to</param>
+    /// <param name="player">The owner of the Tile</param>
     public List<Tile> GetRangeTiles(Tile tile, int range, Player player)
     {
         List<Tile> rangetiles = new List<Tile>();
@@ -300,6 +352,10 @@ public class Grid : MonoBehaviour
         return rangetiles;
     }
 
+    /// <summary>
+    /// Returns a list of the tiles ajacent to the given Tile
+    /// </summary>
+    /// <param name="t">The given Tile</param>
     public List<Tile> GetTilesAround(Tile t)
     {
         List<Tile> tiles = new List<Tile>();
@@ -327,6 +383,10 @@ public class Grid : MonoBehaviour
         return tiles;
     }
 
+    /// <summary>
+    /// Destroys the given structure and its children, and starts _recalculate
+    /// </summary>
+    /// <param name="s">The parent structure</param>
     public void RecalculateOwnership(Structure s)
     {
         Player owner = s.Owner;
@@ -334,26 +394,10 @@ public class Grid : MonoBehaviour
         StartCoroutine(_recalculate(owner));
     }
 
-    void ConvertTiles(List<Structure> structures)
-    {
-        foreach (Structure s in structures)
-        {
-            if (s != null)
-            {
-                if (s is Terrainer)
-                {
-                    Terrainer st = (Terrainer)s;
-                    st.ConvertTiles();
-                }
-                else if (s is BaseTree)
-                {
-                    BaseTree sb = (BaseTree)s;
-                    sb.ConvertTiles();
-                }
-            }
-        }
-    }
-
+    /// <summary>
+    /// reditributes all tiles to the correct owner
+    /// </summary>
+    /// <param name="p">The player who gets to go first</param>
     IEnumerator _recalculate(Player p)
     {
         yield return null;
@@ -384,6 +428,33 @@ public class Grid : MonoBehaviour
         ConvertTiles(enemyBuildings);
     }
 
+    /// <summary>
+    /// Casts the structure, and calls ConvertTiles
+    /// </summary>
+    /// <param name="structures">The structures that need to be cast</param>
+    void ConvertTiles(List<Structure> structures)
+    {
+        foreach (Structure s in structures)
+        {
+            if (s != null)
+            {
+                if (s is Terrainer)
+                {
+                    Terrainer st = (Terrainer)s;
+                    st.ConvertTiles();
+                }
+                else if (s is BaseTree)
+                {
+                    BaseTree sb = (BaseTree)s;
+                    sb.ConvertTiles();
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Returns a list of all structures on the map
+    /// </summary>
     public List<Structure> GetStructures()
     {
         List<Structure> Structures = new List<Structure>();

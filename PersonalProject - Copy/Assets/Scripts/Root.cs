@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Root : MonoBehaviour
 {
-    //Sets the position of a root between 2 points
+    /// <summary>
+    ///Sets the position of a root between 2 points
+    /// </summary>
     public void SetPosition(Vector3 start, Vector3 end)
     {
         var dir = end - start;
@@ -12,7 +14,11 @@ public class Root : MonoBehaviour
         transform.position = mid + Vector3.down * 0.2f;
     }
     
-    //turns the root the right way between 2 points
+    /// <summary>
+    /// turns the root the right way between 2 points
+    /// </summary>
+    /// <param name="start">Point 1</param>
+    /// <param name="end">Point 2</param>
     public void SetRotation(Point start, Point end)
     {
         Vector2 rotation = new Vector2();
@@ -42,11 +48,18 @@ public class Root : MonoBehaviour
         transform.Rotate(rotation);
     }
 
+    /// <summary>
+    /// Starts _turnAround
+    /// </summary>
     public void TurnAround()
     {
         StartCoroutine(_turnAround());
     }
 
+    /// <summary>
+    /// Rotates the root 180*, which looks like the root grows
+    /// </summary>
+    /// <returns></returns>
     IEnumerator _turnAround()
     {
         Transform mesh = transform.GetChild(0);
@@ -58,21 +71,8 @@ public class Root : MonoBehaviour
         }
     }
 
-    IEnumerator _turnBack()
-    {
-        Transform mesh = transform.GetChild(0);
-
-        while (mesh.eulerAngles.x <= 90 || mesh.eulerAngles.x >= 280)
-        {
-            mesh.Rotate(Vector3.left * 100 * Time.deltaTime);
-            yield return null;
-        }
-
-        Destroy(this.gameObject);
-    }
-
     public void DestroyRoot()
     {
-        StartCoroutine(_turnBack());
+        Destroy(gameObject);
     }
 }

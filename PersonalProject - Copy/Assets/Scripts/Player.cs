@@ -24,13 +24,6 @@ public class Player : MonoBehaviour
     public delegate void NewTurn();
     public event NewTurn OnTurnChange;
 
-
-    // Use this for initialization
-    void Start ()
-    {
-        RootPlacer.grid = this.grid;
-	}
-
     public void PlaceStartingTree()
     {
         if (SelectedTile != null)

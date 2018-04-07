@@ -27,6 +27,10 @@ public class RaycastClicker : MonoBehaviour {
         }
 	}
 
+    /// <summary>
+    /// Casts a ray at the position of the mouse
+    /// </summary>
+    /// <param name="button">The pressed button</param>
     void Cast(int button)
     {
         Ray ray = Cam.ScreenPointToRay(Input.mousePosition);
@@ -51,7 +55,10 @@ public class RaycastClicker : MonoBehaviour {
         }
     }
 
-    //On right click, attacks the clicked structure with the selected attacker
+    /// <summary>
+    /// On right click, attacks the clicked structure with the selected attacker
+    /// </summary>
+    /// <param name="Selected"></param>
     public void Attack(Tile Selected)
     {
         Structure attacker = Manager.GetCurrentPlayer().SelectedTile.GetStructure();
@@ -71,6 +78,10 @@ public class RaycastClicker : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Selects the content of a tile
+    /// </summary>
+    /// <param name="Selected">The selected Tile</param>
     public void Select(Tile Selected)
     {
         Manager.SelectTile(Selected);

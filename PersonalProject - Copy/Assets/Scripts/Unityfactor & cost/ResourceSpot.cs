@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum ResourceType
 {
@@ -9,6 +7,9 @@ public enum ResourceType
     Solar
 }
 
+/// <summary>
+/// Because of the unitfactory patern, and the fact things get spawned during runtime, collecters don't know what resource to attach to without these resource spots
+/// </summary>
 public class ResourceSpot : MonoBehaviour
 {
     public ResourceType Type;

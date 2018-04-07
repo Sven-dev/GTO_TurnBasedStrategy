@@ -13,6 +13,11 @@ public abstract class Structure : MonoBehaviour {
     public LabelShower Label;
     public Grid Grid;
 
+    /// <summary>
+    /// Adds variables when the Structure is first spawned
+    /// </summary>
+    /// <param name="p">The player who owns the Attacker</param>
+    /// <param name="g">A reference to the field</param>
     public virtual void StartUp(Player p, Grid g)
     {
         Owner = p;
@@ -24,6 +29,10 @@ public abstract class Structure : MonoBehaviour {
         Label.UpdateLabel(Health);
     }
 
+    /// <summary>
+    /// Detracts health and starts _takeDamage, returns a deathstate
+    /// </summary>
+    /// <param name="damage">The amount of damage taken</param>
     public virtual bool TakeDamage(int damage)
     {
         Health -= damage;
@@ -32,18 +41,26 @@ public abstract class Structure : MonoBehaviour {
         return false;
     }
 
-    //Enables the Labelshower
+    /// <summary>
+    /// Enables the Labelshower
+    /// </summary>
     public void ShowData()
     {
         Label.gameObject.SetActive(true);
     }
 
-    //Disables the Labelshower
+    /// <summary>
+    /// Disables the Labelshower
+    /// </summary>
     public void HideData()
     {
         Label.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Gives the player feedback on the amount of damage taken by updating the label, and destroying the Structure if health is 0
+    /// </summary>
+    /// <param name="damage">The amount of damage taken</param>
     IEnumerator _takeDamage(int damage)
     {
         Label.gameObject.SetActive(true);
@@ -66,6 +83,9 @@ public abstract class Structure : MonoBehaviour {
         Label.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Gets all Structures under this one in the hierarchy
+    /// </summary>
     public List<Structure> GetChildren()
     {
         List<Structure> children = new List<Structure>();
@@ -77,6 +97,9 @@ public abstract class Structure : MonoBehaviour {
         return children;
     }
 
+    /// <summary>
+    /// Unsets all visuals of itself and all children in the heirarchy
+    /// </summary>
     public virtual void UnsetStructure()
     {
         foreach(Structure s in Children)
@@ -96,6 +119,9 @@ public abstract class Structure : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Destroys this structure and all children in the hierarchy
+    /// </summary>
     public void DestroyStructure()
     {
         foreach (Structure s in Children)
@@ -106,12 +132,19 @@ public abstract class Structure : MonoBehaviour {
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// Starts _placeStructure and _placeRoots
+    /// </summary>
     public void Place()
     {
         StartCoroutine(_placeStructure());
         StartCoroutine(_placeRoots());
     }
 
+    /// <summary>
+    /// Slowly moves the Structure out of the ground
+    /// </summary>
+    /// <returns></returns>
     IEnumerator _placeStructure()
     {
         while (transform.position.y < 0)
@@ -121,6 +154,9 @@ public abstract class Structure : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Places all Roots, and starts TurnAround for each one of them
+    /// </summary>
     IEnumerator _placeRoots()
     {
         yield return new WaitForEndOfFrame();

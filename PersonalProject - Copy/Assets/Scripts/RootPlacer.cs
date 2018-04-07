@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class RootPlacer : Placer {
+public class RootPlacer : MonoBehaviour
+{
 
     public Root Prefab;
     public PathFinder PathFinder;
+    public Grid Grid;
 
     [HideInInspector]
     public List<Root> Rootlist;
 
+    /// <summary>
+    /// Spawns and returns 4 roots around a tile
+    /// </summary>
+    /// <param name="t">The Tile that needs to be spawned around</param>
+    /// <param name="p">The Player that owns the Tile</param>
     public List<Root> SpawnAround(Tile t, Player p)
     {
-        Corner[,] corners = grid.GetCorners(t);
+        Corner[,] corners = Grid.GetCorners(t);
 
         foreach (Corner c in corners)
         {
@@ -30,6 +37,12 @@ public class RootPlacer : Placer {
         return roots;
     }
 
+    /// <summary>
+    /// Spawns a Root between 2 tiles
+    /// </summary>
+    /// <param name="tile1"></param>
+    /// <param name="tile2"></param>
+    /// <returns></returns>
     public Root SpawnRoot(Corner tile1, Corner tile2)
     {
         Root r = Instantiate(Prefab, tile1.transform.position, Quaternion.identity, tile1.transform);
@@ -39,12 +52,17 @@ public class RootPlacer : Placer {
         return r;
     }
 
+    /// <summary>
+    /// Pathfinds the closest tile that is owned by p
+    /// </summary>
+    /// <param name="end">The end Tile</param>
+    /// <param name="p">The player the Tile belongs to</param>
+    /// <returns></returns>
     public Tile GetClosestTile(Tile end, Player p)
     {
-        List<Tile> buildings = grid.GetBuildings(p, end.GetComponentInChildren<Structure>());
+        List<Tile> buildings = Grid.GetBuildings(p, end.GetComponentInChildren<Structure>());
         int smallestDist = int.MaxValue;
         Tile closest = null;
-
 
         foreach (Tile t in buildings)
         {
@@ -59,10 +77,17 @@ public class RootPlacer : Placer {
         return closest;
     }
 
+    /// <summary>
+    /// Gets the closest path between 2 tiles, that is owned by p
+    /// </summary>
+    /// <param name="start">The start Tile</param>
+    /// <param name="end">The end Tile</param>
+    /// <param name="p">The player the path needs to be owned by</param>
+    /// <returns></returns>
     public List<Root> GetClosestPath(Tile start, Tile end, Player p)
     {
-        Corner[,] startCorners = grid.GetCorners(start);
-        Corner[,] endCorners = grid.GetCorners(end);
+        Corner[,] startCorners = Grid.GetCorners(start);
+        Corner[,] endCorners = Grid.GetCorners(end);
 
         int smallestDist = int.MaxValue;
         Corner smallestStart = null;
@@ -70,7 +95,7 @@ public class RootPlacer : Placer {
 
         foreach (Corner cs in startCorners)
         {
-            foreach(Corner ce in endCorners)
+            foreach (Corner ce in endCorners)
             {
                 int i = PathFinder.GuessDistance(cs, ce);
                 if (i < smallestDist)

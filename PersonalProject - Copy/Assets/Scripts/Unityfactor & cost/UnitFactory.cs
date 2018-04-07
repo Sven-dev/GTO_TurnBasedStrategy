@@ -7,6 +7,10 @@ public class UnitFactory : MonoBehaviour
     public Structure prefab;
     public List<Cost> unitCost;
 
+    /// <summary>
+    /// Checks if there's enough resource to by the unit, returns the prefab
+    /// </summary>
+    /// <returns></returns>
     public Structure Buy()
     {
         bool affordable = true;

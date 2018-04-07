@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,6 +8,10 @@ public class RangeShower : MonoBehaviour {
     public Grid Grid;
     public List<EventTrigger> Triggers;
 
+    /// <summary>
+    /// Displays the range of a Structure
+    /// </summary>
+    /// <param name="s">The structure given</param>
     public void ShowRange(Structure s)
     {
         Player player = PlayerManager.GetCurrentPlayer();
@@ -27,6 +30,13 @@ public class RangeShower : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Returns a list of tiles that are in range of s
+    /// </summary>
+    /// <param name="s">The given structure</param>
+    /// <param name="selected">The selected tile</param>
+    /// <param name="player">The player the structure belongs to</param>
+    /// <returns></returns>
     List<Tile> GetTiles(Structure s, Tile selected, Player player)
     {
         int range = int.MinValue;
@@ -62,6 +72,10 @@ public class RangeShower : MonoBehaviour {
         return null;
     }
 
+    /// <summary>
+    /// Hides the range of Structure
+    /// </summary>
+    /// <param name="s">The given Structure</param>
     public void HideRange(Structure s)
     {
         Player player = PlayerManager.GetCurrentPlayer();
@@ -81,6 +95,10 @@ public class RangeShower : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Destroys the range shower of the start tree, after the first turn
+    /// </summary>
+    /// <param name="index">The index of the player</param>
     public void DestroyTrigger(int index)
     {
         Destroy(Triggers[index]);

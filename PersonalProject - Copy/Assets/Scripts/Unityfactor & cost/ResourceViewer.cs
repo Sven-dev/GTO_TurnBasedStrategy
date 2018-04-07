@@ -21,6 +21,9 @@ public class ResourceViewer : MonoBehaviour {
         resource.OnNotEnough += OnInsufficient;
     }
 
+    /// <summary>
+    /// Starts _change
+    /// </summary>
     void OnChange()
     {
         if (this.isActiveAndEnabled)
@@ -29,11 +32,17 @@ public class ResourceViewer : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Starts _insufficient
+    /// </summary>
     void OnInsufficient()
     {
-        StartCoroutine(_Insufficient());
+        StartCoroutine(_insufficient());
     }
 
+    /// <summary>
+    /// Changes the UI when the amount of a certain resource gets changed
+    /// </summary>
     IEnumerator _change()
     {
         if (resource.Amount > oldValue)
@@ -51,7 +60,11 @@ public class ResourceViewer : MonoBehaviour {
         field.color = Default;
     }
 
-    IEnumerator _Insufficient()
+    /// <summary>
+    /// Gives feedback when there isn't enough of a resource to complete a task
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator _insufficient()
     {
         int times = 0;
         Color old = field.color;

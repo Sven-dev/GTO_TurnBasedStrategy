@@ -13,6 +13,11 @@ public class Attacker : Structure
 
     public List<Tile> Tiles;
 
+    /// <summary>
+    /// Adds variables when the Attacker is first spawned
+    /// </summary>
+    /// <param name="p">The player who owns the Attacker</param>
+    /// <param name="g">A reference to the field</param>
     public override void StartUp(Player p, Grid g)
     {
         base.StartUp(p, g);
@@ -23,12 +28,19 @@ public class Attacker : Structure
         Costs.Add(new Cost(p.transform.GetChild(1).GetChild(1).GetComponent<Resource>(), 1));
     }
 
+    /// <summary>
+    /// Displays the firing range of the Attacker
+    /// </summary>
     public void DisplayRange()
     {
         RangeShower.ShowRange(this);
         StartCoroutine(_selected());
     }
 
+    /// <summary>
+    /// Calls HideRange when the Attacker is deselected 
+    /// </summary>
+    /// <returns></returns>
     IEnumerator _selected()
     {
         Tile t = GetComponentInParent<Tile>();
@@ -40,6 +52,9 @@ public class Attacker : Structure
         HideRange();
     }
 
+    /// <summary>
+    /// Hides the firing range of the Attacker
+    /// </summary>
     void HideRange()
     {
         Tile selected = Owner.SelectedTile;
@@ -52,11 +67,18 @@ public class Attacker : Structure
         }
     }
 
+    /// <summary>
+    /// Sets Fired to false, allowing the Attacker to shoot again
+    /// </summary>
     public void ReloadWeapon()
     {
         Fired = false;
     }
 
+    /// <summary>
+    /// Starts _turnTowards and turns firing off, if the player can afford it
+    /// </summary>
+    /// <param name="target">The target that is getting attacked</param>
     public void DealDamage(Structure target)
     {
         if (Buy())
@@ -66,6 +88,9 @@ public class Attacker : Structure
         }
     }
 
+    /// <summary>
+    /// Checks if the player has enough resources to use the attack
+    /// </summary>
     public bool Buy()
     {
         bool affordable = true;
@@ -92,6 +117,10 @@ public class Attacker : Structure
         return false;
     }
 
+    /// <summary>
+    /// Turns the barrel of the Attacker towards the attacked Structure
+    /// </summary>
+    /// <param name="structure">The Structure getting attacked</param>
     IEnumerator _turnTowards(Structure structure)
     {
         Transform cannon = transform.GetChild(0);
@@ -117,6 +146,11 @@ public class Attacker : Structure
         }
     }
 
+    /// <summary>
+    /// Spawns a cannonball and fires it towards target
+    /// </summary>
+    /// <param name="cannon">The cannon mesh</param>
+    /// <param name="target">The Structure getting attacked</param>
     IEnumerator _fire(Transform cannon, Structure target)
     {
         GameObject cannonball = GameObject.CreatePrimitive(PrimitiveType.Sphere);
