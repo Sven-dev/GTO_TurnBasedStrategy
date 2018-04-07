@@ -194,7 +194,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1802179698191018
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,12 +683,12 @@ MonoBehaviour:
   Children: []
   Roots: []
   Label: {fileID: 114982103733887628}
-  Range: 0
+  Grid: {fileID: 0}
+  Range: 3
   Damage: 1
   Fired: 0
   Costs: []
   Tiles: []
-  Grid: {fileID: 0}
 --- !u!114 &114150776434855414
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -770,7 +770,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346e814d71eb6b441b56befb917526ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cam: {fileID: 0}
   Rotatable: {fileID: 1556450869994266}
   Hp: {fileID: 114771008867781066}
   Mesh: {fileID: 1339031703209112}

@@ -5,31 +5,27 @@ using UnityEngine;
 public class Attacker : Structure
 {
     public int Range;
+    private RangeShower RangeShower;
 
     public int Damage;
     public bool Fired;
     public List<Cost> Costs;
 
     public List<Tile> Tiles;
-    public Grid Grid;
 
     public override void StartUp(Player p, Grid g)
     {
-        Owner = p;
-        this.Grid = g;
+        base.StartUp(p, g);
+        RangeShower = Camera.main.GetComponent<RangeShower>();
         Owner.OnTurnChange += ReloadWeapon;
         ReloadWeapon();
-        Tiles = Grid.GetRangeTiles(transform.parent.transform.GetComponent<Tile>(), Range, Owner);
+        Tiles = Grid.GetRangeTiles(transform.parent.transform.GetComponent<Tile>(), Range);
         Costs.Add(new Cost(p.transform.GetChild(1).GetChild(1).GetComponent<Resource>(), 1));
     }
 
     public void DisplayRange()
     {
-        foreach(Tile t in Tiles)
-        {
-            t.Select();
-        }
-
+        RangeShower.ShowRange(this);
         StartCoroutine(_selected());
     }
 
@@ -41,15 +37,20 @@ public class Attacker : Structure
             yield return null;
         }
 
-        foreach (Tile t2 in Tiles)
+        HideRange();
+    }
+
+    void HideRange()
+    {
+        Tile selected = Owner.SelectedTile;
+        foreach (Tile t in Tiles)
         {
-            if (t2 != Owner.SelectedTile)
+            if (t != selected)
             {
-                t2.Deselect();
+                t.Deselect();
             }
         }
     }
-
 
     public void ReloadWeapon()
     {

@@ -147,7 +147,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1989831158197424
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,7 +519,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346e814d71eb6b441b56befb917526ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cam: {fileID: 0}
   Rotatable: {fileID: 1532846420114444}
   Hp: {fileID: 114854932534643194}
   Mesh: {fileID: 1562637956071502}
@@ -588,6 +587,7 @@ MonoBehaviour:
   Children: []
   Roots: []
   Label: {fileID: 114370196496739874}
+  Grid: {fileID: 0}
   Amount: 1
   Resource: {fileID: 0}
 --- !u!114 &114947717145909842

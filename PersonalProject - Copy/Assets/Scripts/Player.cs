@@ -40,8 +40,6 @@ public class Player : MonoBehaviour
 
             BaseTile = SelectedTile;
             b.GrowCost.resource = Resources[2];
-
-            GrowTree();
         }
     }
 
@@ -136,16 +134,17 @@ public class Player : MonoBehaviour
 
     public void GrowTree()
     {
-        if (BaseTile != null)
+        if (BaseTile == null)
         {
-            BaseTree b = BaseTile.GetStructure() as BaseTree;
-            if (b != null)
-            {
-                b.Grow();
-                SliderContoller.UpdateSlider(b.Health);
-                VictoryController.CheckVictory(b, this);
-            }
+            PlaceStartingTree();
+        }
 
+        BaseTree b = BaseTile.GetStructure() as BaseTree;
+        if (b != null)
+        {
+            b.Grow();
+            SliderContoller.UpdateSlider(b.Health);
+            VictoryController.CheckVictory(b, this);
         }
     }
 }

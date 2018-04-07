@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BaseTree : Structure
 {
-    public Grid Grid;
     public int Range;
+    public List<Tile> Tiles;
 
     [Space]
     public int Amount;
@@ -33,23 +33,27 @@ public class BaseTree : Structure
 
     public void ConvertTiles()
     {
-        List<Tile> tiles = Grid.GetRangeTiles(transform.parent.transform.GetComponent<Tile>(), Range, Owner);
-        foreach (Tile t in tiles)
+        Tiles = Grid.GetRangeTiles(transform.parent.transform.GetComponent<Tile>(), Range, Owner);
+        foreach (Tile t in Tiles)
         {
             t.SetOwner(Owner);
         }
     }
 
+    public void NeutralizeTiles()
+    {
+        foreach (Tile t in Tiles)
+        {
+            t.SetNeutral();
+        }
+    }
+
     public override void StartUp(Player p, Grid g)
     {
-        Owner = p;
-        this.Grid = g;
-
+        base.StartUp(p, g);
         ConvertTiles();
         Owner.OnTurnChange += CollectResources;
-
         AttachResources();
-
     }
 
     public override bool TakeDamage(int damage)
@@ -83,5 +87,14 @@ public class BaseTree : Structure
     {
         transform.GetChild(0).localScale += new Vector3(0.1f, 0.1f, 0.1f) * amount;
         Label.UpdatePos();
+    }
+
+    public override void UnsetStructure()
+    {
+        base.DestroyStructure();
+        foreach (Tile t in Tiles)
+        {
+            t.SetNeutral();
+        }
     }
 }

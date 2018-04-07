@@ -22,7 +22,7 @@ public class Collector : Structure
 
     public override void StartUp(Player p, Grid g)
     {
-        Owner = p;
+        base.StartUp(p, g);
         Owner.OnTurnChange += CollectResources;
         AttachResources();
     }

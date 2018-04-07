@@ -8,7 +8,7 @@ public class Tile : MonoBehaviour {
     public Point Position;
     public Player Owner;
 
-    private bool Selected;
+    public bool Selected;
     private Renderer r;
 
     public Color Color

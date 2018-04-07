@@ -143,8 +143,6 @@ public class Grid : MonoBehaviour
         return CornerList;
     }
     
-
-
     public Corner[,] GetCorners(Tile t)
     {
         return new Corner[,]
@@ -327,5 +325,77 @@ public class Grid : MonoBehaviour
         }
 
         return tiles;
+    }
+
+    public void RecalculateOwnership(Structure s)
+    {
+        Player owner = s.Owner;
+        s.DestroyStructure();
+        StartCoroutine(_recalculate(owner));
+    }
+
+    void ConvertTiles(List<Structure> structures)
+    {
+        foreach (Structure s in structures)
+        {
+            if (s != null)
+            {
+                if (s is Terrainer)
+                {
+                    Terrainer st = (Terrainer)s;
+                    st.ConvertTiles();
+                }
+                else if (s is BaseTree)
+                {
+                    BaseTree sb = (BaseTree)s;
+                    sb.ConvertTiles();
+                }
+            }
+        }
+    }
+
+    IEnumerator _recalculate(Player p)
+    {
+        yield return null;
+
+        List<Structure> buildings = GetStructures();
+        List<Structure> playerBuildings = new List<Structure>();
+        List<Structure> enemyBuildings = new List<Structure>();
+
+        foreach (Structure s in buildings)
+        {
+            if (s != null)
+            {
+                if (s.Owner == p)
+                {
+                    playerBuildings.Add(s);
+                }
+                else
+                {
+                    enemyBuildings.Add(s);
+                }
+            }
+        }
+
+        print("player: " + playerBuildings.Count);
+        print("enemy: " + enemyBuildings.Count);
+
+        ConvertTiles(playerBuildings);
+        ConvertTiles(enemyBuildings);
+    }
+
+    public List<Structure> GetStructures()
+    {
+        List<Structure> Structures = new List<Structure>();
+        foreach (Tile t in TileArray)
+        {
+            Structure s = t.GetComponentInChildren<Structure>();
+            if (s != null)
+            {
+                Structures.Add(s);
+            }
+        }
+
+        return Structures;
     }
 }

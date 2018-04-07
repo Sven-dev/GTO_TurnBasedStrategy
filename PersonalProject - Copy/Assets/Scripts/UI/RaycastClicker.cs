@@ -54,9 +54,7 @@ public class RaycastClicker : MonoBehaviour {
     //On right click, attacks the clicked structure with the selected attacker
     public void Attack(Tile Selected)
     {
-        Tile target = Manager.GetCurrentPlayer().SelectedTile;
-        Structure attacker = target.GetStructure();
-
+        Structure attacker = Manager.GetCurrentPlayer().SelectedTile.GetStructure();
         Structure defender = Selected.GetStructure();
 
         //Check if selected tile is an attacker                   
@@ -65,7 +63,7 @@ public class RaycastClicker : MonoBehaviour {
             Attacker a = attacker as Attacker;
 
             //Check if tile is in range
-            if (a.Tiles.Contains(target) && a.Fired == false)
+            if (a.Tiles.Contains(Selected) && a.Fired == false)
             {
                 //Deal Damage
                 a.DealDamage(defender);
@@ -77,13 +75,12 @@ public class RaycastClicker : MonoBehaviour {
     {
         Manager.SelectTile(Selected);
         Structure s = Selected.GetStructure();
-        Resource r = Selected.GetResource();
 
-        //Tile has a structure on it                     
+        // if Tile has a structure on it                     
         if (s != null && s is Attacker)
         {
-            Attacker a = s as Attacker;
             //display attack range
+            Attacker a = s as Attacker;
             a.DisplayRange();
         }
     }

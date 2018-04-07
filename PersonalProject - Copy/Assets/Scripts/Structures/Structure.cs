@@ -11,8 +11,13 @@ public abstract class Structure : MonoBehaviour {
     public List<Root> Roots;
     [Space]
     public LabelShower Label;
+    public Grid Grid;
 
-    public abstract void StartUp(Player p, Grid g);
+    public virtual void StartUp(Player p, Grid g)
+    {
+        Owner = p;
+        Grid = g;
+    }
 
     private void Start()
     {
@@ -43,31 +48,42 @@ public abstract class Structure : MonoBehaviour {
     {
         Label.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         if (Health < 0)
         {
             Health = 0;
         }
 
         Label.UpdateLabel(Health);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
 
         if (Health == 0)
         {
-            DestroyStructure();
-            Destroy(gameObject);
+            UnsetStructure();
+            Grid.RecalculateOwnership(this);
         }
 
         Label.gameObject.SetActive(false);
     }
 
-    public void DestroyStructure()
+    public List<Structure> GetChildren()
+    {
+        List<Structure> children = new List<Structure>();
+        foreach(Structure s in Children)
+        {
+            children.AddRange(s.GetChildren());
+        }
+
+        return children;
+    }
+
+    public virtual void UnsetStructure()
     {
         foreach(Structure s in Children)
         {
             if (s != null)
             {
-                s.DestroyStructure();
+                s.UnsetStructure();
             }
         }
 
@@ -78,8 +94,16 @@ public abstract class Structure : MonoBehaviour {
                 r.DestroyRoot();
             }
         }
+    }
 
-        Destroy(this.gameObject);
+    public void DestroyStructure()
+    {
+        foreach (Structure s in Children)
+        {
+            s.DestroyStructure();
+        }
+
+        Destroy(gameObject);
     }
 
     public void Place()
@@ -103,7 +127,7 @@ public abstract class Structure : MonoBehaviour {
         foreach (Root r in Roots)
         {
             r.TurnAround();
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.25f);
         }
     }
 }

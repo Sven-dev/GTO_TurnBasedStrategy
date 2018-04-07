@@ -711,7 +711,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346e814d71eb6b441b56befb917526ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cam: {fileID: 0}
   Rotatable: {fileID: 1764069055003392}
   Hp: {fileID: 114183599302565098}
   Mesh: {fileID: 1742311446225708}
@@ -731,12 +730,12 @@ MonoBehaviour:
   Children: []
   Roots: []
   Label: {fileID: 114325625335402406}
-  Range: 0
+  Grid: {fileID: 0}
+  Range: 3
   Damage: 1
   Fired: 0
   Costs: []
   Tiles: []
-  Grid: {fileID: 0}
 --- !u!114 &114689044750506148
 MonoBehaviour:
   m_ObjectHideFlags: 1

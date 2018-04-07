@@ -353,7 +353,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346e814d71eb6b441b56befb917526ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cam: {fileID: 0}
   Rotatable: {fileID: 1668987008413246}
   Hp: {fileID: 114955525843331514}
   Mesh: {fileID: 1239977523511308}
@@ -368,7 +367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64512426cd751864f9e2f2d81ac940b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 1
+  Health: 0
   Owner: {fileID: 0}
   Children: []
   Roots:
@@ -378,10 +377,12 @@ MonoBehaviour:
   - {fileID: 0}
   Label: {fileID: 114239420196934520}
   Grid: {fileID: 0}
-  Range: 3
+  Grid: {fileID: 0}
+  Range: 2
+  Tiles: []
   Amount: 1
   Resources: []
-  GrowthMax: 6
+  GrowthMax: 30
   GrowCost:
     resource: {fileID: 0}
     cost: 5

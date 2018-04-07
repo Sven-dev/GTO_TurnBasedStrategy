@@ -4,23 +4,38 @@ using UnityEngine;
 
 public class Terrainer : Structure
 {
-    public Grid Grid;
     public int Range;
-    public List<Tile> tiles;
+    public List<Tile> Tiles;
 
     public void ConvertTiles()
     {
-        foreach (Tile t in tiles)
+        Tiles = Grid.GetRangeTiles(transform.parent.transform.GetComponent<Tile>(), Range, Owner);
+        foreach (Tile t in Tiles)
         {
             t.SetOwner(Owner);
         }
     }
 
+    public void NeutralizeTiles()
+    {
+        foreach (Tile t in Tiles)
+        {
+            t.SetNeutral();
+        }
+    }
+    
     public override void StartUp(Player p, Grid g)
     {
-        Owner = p;
-        this.Grid = g;
-        tiles = Grid.GetRangeTiles(transform.parent.transform.GetComponent<Tile>(), Range, Owner);
+        base.StartUp(p, g);
         ConvertTiles();
+    }
+
+    public override void UnsetStructure()
+    {
+        base.UnsetStructure();
+        foreach (Tile t in Tiles)
+        {
+            t.SetNeutral();
+        }
     }
 }
