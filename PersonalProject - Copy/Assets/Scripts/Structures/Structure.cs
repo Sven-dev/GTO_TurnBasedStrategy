@@ -19,9 +19,24 @@ public abstract class Structure : MonoBehaviour {
         Label.UpdateLabel(Health);
     }
 
-    public void TakeDamage(int damage)
+    public virtual bool TakeDamage(int damage)
     {
+        Health -= damage;
         StartCoroutine(_takeDamage(damage));
+
+        return false;
+    }
+
+    //Enables the Labelshower
+    public void ShowData()
+    {
+        Label.gameObject.SetActive(true);
+    }
+
+    //Disables the Labelshower
+    public void HideData()
+    {
+        Label.gameObject.SetActive(false);
     }
 
     IEnumerator _takeDamage(int damage)
@@ -29,7 +44,6 @@ public abstract class Structure : MonoBehaviour {
         Label.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(0.5f);
-        Health -= damage;
         if (Health < 0)
         {
             Health = 0;
@@ -66,5 +80,30 @@ public abstract class Structure : MonoBehaviour {
         }
 
         Destroy(this.gameObject);
+    }
+
+    public void Place()
+    {
+        StartCoroutine(_placeStructure());
+        StartCoroutine(_placeRoots());
+    }
+
+    IEnumerator _placeStructure()
+    {
+        while (transform.position.y < 0)
+        {
+            transform.Translate(Vector3.up * 3 * Time.deltaTime);
+            yield return null;
+        }
+    }
+
+    IEnumerator _placeRoots()
+    {
+        yield return new WaitForEndOfFrame();
+        foreach (Root r in Roots)
+        {
+            r.TurnAround();
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }

@@ -35,11 +35,13 @@ public class Player : MonoBehaviour
     {
         if (SelectedTile != null)
         {
-            BaseTree b = structures[0].Buy() as BaseTree;
-            b = Place(b, SelectedTile) as BaseTree;
+            Structure s = structures[0].Buy();
+            BaseTree b = Place(s, SelectedTile) as BaseTree;
 
             BaseTile = SelectedTile;
             b.GrowCost.resource = Resources[2];
+
+            GrowTree();
         }
     }
 
@@ -94,27 +96,10 @@ public class Player : MonoBehaviour
     public Structure Place(Structure s, Tile t)
     {
         s = Instantiate(s, t.transform.position + new Vector3(0, -5, 0), Quaternion.identity, t.transform);
-        StartCoroutine(_place(s));
         s.StartUp(this, grid);
         s.Roots = RootPlacer.SpawnAround(SelectedTile, this);
+        s.Place();
         return s;
-    }
-
-    IEnumerator _place(Structure s)
-    {
-        while (s.transform.position.y < 0)
-        {
-            s.transform.Translate(Vector3.up * 3 * Time.deltaTime);
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(2f);
-
-        foreach(Root r in s.Roots)
-        {
-            r._turnAround();
-            yield return new WaitForSeconds(0.5f);
-        }
     }
 
     public void SelectTile(Tile t)
@@ -131,12 +116,11 @@ public class Player : MonoBehaviour
 
     public void StartTurn()
     {
+        transform.GetChild(2).gameObject.SetActive(true);
         if (OnTurnChange != null)
         {
             OnTurnChange();
         }
-
-        gameObject.SetActive(true);
     }
 
     public void EndTurn()
@@ -147,17 +131,21 @@ public class Player : MonoBehaviour
         }
 
         SelectedTile = null;
-        gameObject.SetActive(false);
+        transform.GetChild(2).gameObject.SetActive(false);
     }
 
     public void GrowTree()
     {
-        BaseTree b = BaseTile.GetStructure() as BaseTree;
-        if (b != null)
+        if (BaseTile != null)
         {
-            b.Grow();
-            SliderContoller.UpdateSlider(b.Growthcurrent);
-            VictoryController.CheckVictory(b);
+            BaseTree b = BaseTile.GetStructure() as BaseTree;
+            if (b != null)
+            {
+                b.Grow();
+                SliderContoller.UpdateSlider(b.Health);
+                VictoryController.CheckVictory(b, this);
+            }
+
         }
     }
 }

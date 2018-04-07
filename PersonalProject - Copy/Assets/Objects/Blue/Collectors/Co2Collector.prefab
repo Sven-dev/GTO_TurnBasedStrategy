@@ -2249,6 +2249,7 @@ MonoBehaviour:
   Cam: {fileID: 0}
   Rotatable: {fileID: 1065006077336556}
   Hp: {fileID: 114467281207475836}
+  Mesh: {fileID: 1520673907881780}
 --- !u!114 &114931522142672990
 MonoBehaviour:
   m_ObjectHideFlags: 1

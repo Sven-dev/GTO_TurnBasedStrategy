@@ -39,6 +39,5 @@ public class PlayerManager : MonoBehaviour {
         }
 
         PlayerList[CurrentPlayer].SelectTile(t);
-        print("Tile selected");
     }
 }

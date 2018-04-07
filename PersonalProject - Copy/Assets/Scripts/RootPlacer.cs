@@ -11,16 +11,6 @@ public class RootPlacer : Placer {
     [HideInInspector]
     public List<Root> Rootlist;
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     public List<Root> SpawnAround(Tile t, Player p)
     {
         Corner[,] corners = grid.GetCorners(t);
@@ -46,9 +36,6 @@ public class RootPlacer : Placer {
 
         r.SetRotation(tile1.Position, tile2.Position);
         r.SetPosition(tile1.transform.position, tile2.transform.position);
-
-        StartCoroutine(r._turnAround());
-
         return r;
     }
 

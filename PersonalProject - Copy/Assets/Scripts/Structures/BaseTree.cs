@@ -12,7 +12,6 @@ public class BaseTree : Structure
     public List<Resource> Resources;
 
     [Space]
-    public int Growthcurrent;
     public int GrowthMax;
     public Cost GrowCost;
 
@@ -20,7 +19,7 @@ public class BaseTree : Structure
     {
         foreach(Resource r in Resources)
         {
-            r.Amount += this.Amount;
+            r.Change(Amount);
         }
     }
 
@@ -53,16 +52,36 @@ public class BaseTree : Structure
 
     }
 
+    public override bool TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        if (Health <= 0)
+        {
+            return true;
+        }
+
+        ChangeSize(-damage);
+        return false;
+    }
+
     public void Grow()
     {
         if (GrowCost.resource.Amount - GrowCost.cost >= 0)
         {
             GrowCost.resource.Change(-GrowCost.cost);
-            Growthcurrent += GrowCost.cost;
-            transform.localScale += new Vector3(0.75f, 0.75f, 0.75f);
+            Health += GrowCost.cost;
+            Label.UpdateLabel(Health);
+
+            ChangeSize(GrowCost.cost);
             return;
         }
 
-        print("You don't have enough " + GrowCost.resource.ToString());
+        GrowCost.resource.Insufficient();
+    }
+
+    void ChangeSize(int amount)
+    {
+        transform.GetChild(0).localScale += new Vector3(0.1f, 0.1f, 0.1f) * amount;
+        Label.UpdatePos();
     }
 }

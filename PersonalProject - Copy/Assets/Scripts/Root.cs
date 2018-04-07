@@ -9,7 +9,7 @@ public class Root : MonoBehaviour
     {
         var dir = end - start;
         var mid = (dir) / 2.0f + start;
-        transform.position = mid;
+        transform.position = mid + Vector3.down * 0.2f;
     }
     
     //turns the root the right way between 2 points
@@ -42,7 +42,12 @@ public class Root : MonoBehaviour
         transform.Rotate(rotation);
     }
 
-    public IEnumerator _turnAround()
+    public void TurnAround()
+    {
+        StartCoroutine(_turnAround());
+    }
+
+    IEnumerator _turnAround()
     {
         Transform mesh = transform.GetChild(0);
         
@@ -53,8 +58,21 @@ public class Root : MonoBehaviour
         }
     }
 
+    IEnumerator _turnBack()
+    {
+        Transform mesh = transform.GetChild(0);
+
+        while (mesh.eulerAngles.x <= 90 || mesh.eulerAngles.x >= 280)
+        {
+            mesh.Rotate(Vector3.left * 100 * Time.deltaTime);
+            yield return null;
+        }
+
+        Destroy(this.gameObject);
+    }
+
     public void DestroyRoot()
     {
-        Destroy(this.gameObject);
+        StartCoroutine(_turnBack());
     }
 }

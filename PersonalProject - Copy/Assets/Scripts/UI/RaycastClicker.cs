@@ -37,16 +37,17 @@ public class RaycastClicker : MonoBehaviour {
         if (hit.collider != null)
         {
             Tile Selected = hit.collider.GetComponent<Tile>();
-
-            if (button == 0)
+            if (Selected != null)
             {
-                Select(Selected);
+                if (button == 0)
+                {
+                    Select(Selected);
+                }
+                else if (button == 1)
+                {
+                    Attack(Selected);
+                }
             }
-            else if (button == 1)
-            {
-                Attack(Selected);
-            }
-            
         }
     }
 
@@ -59,18 +60,15 @@ public class RaycastClicker : MonoBehaviour {
         Structure defender = Selected.GetStructure();
 
         //Check if selected tile is an attacker                   
-        if (attacker != null && defender != null)
+        if (attacker != null && defender != null && attacker is Attacker && defender.Owner != attacker.Owner)
         {
-            if (attacker is Attacker)
-            {
-                Attacker a = attacker as Attacker;
+            Attacker a = attacker as Attacker;
 
-                //Check if tile is in range
-                if (a.Tiles.Contains(target))
-                {
-                    //Deal Damage
-                    a.DealDamage(defender);
-                }
+            //Check if tile is in range
+            if (a.Tiles.Contains(target) && a.Fired == false)
+            {
+                //Deal Damage
+                a.DealDamage(defender);
             }
         }
     }
@@ -82,37 +80,11 @@ public class RaycastClicker : MonoBehaviour {
         Resource r = Selected.GetResource();
 
         //Tile has a structure on it                     
-        if (s != null)
+        if (s != null && s is Attacker)
         {
-            //Display health
-
-            if (s is Attacker)
-            {
-                Attacker a = s as Attacker;
-                //display attack range
-            }
-            else if (s is Terrainer)
-            {
-                //display terrain range
-            }
-        }
-        //Tile has a resource on it
-        else if (r != null)
-        {
-            //Display resource
-        }
-
-        // Tile is owned by the player
-        if (Selected.Owner == Manager.GetCurrentPlayer())
-        {
-            if (s == null)
-            {
-                //enable attacker and terrainer buy buttons
-            }
-            if (r != null)
-            {
-                //enable collector buy button
-            }
+            Attacker a = s as Attacker;
+            //display attack range
+            a.DisplayRange();
         }
     }
 }

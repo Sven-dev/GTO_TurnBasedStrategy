@@ -39,7 +39,6 @@ public class PathFinder : MonoBehaviour
 
             foreach(Corner c in Grid.GetCornerNeighbours(current))
             {
-                //!c.Ownership.Contains(p) || 
                 if(ClosedSet.Contains(c))
                 {
                     continue;
@@ -49,7 +48,6 @@ public class PathFinder : MonoBehaviour
                 int guessedDistance = GuessDistance(current, c);
                 if (guessedDistance < c.GCost || !OpenSet.Contains(c))
                 {
-                    print("Guessed distance: " + guessedDistance);
                     c.GCost = guessedDistance;
                     c.HCost = GuessDistance(c, end);
                     c.Parent = current;

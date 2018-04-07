@@ -8,23 +8,47 @@ public class ResourceViewer : MonoBehaviour {
     public Resource resource;
     private Text field;
     private int oldValue;
+    private Color Default;
 
     private void Awake()
     {
         oldValue = 0;
         field = GetComponent<Text>();
+        Default = field.color;
+
         resource.OnAmountChange += OnChange;
+        OnChange();
         resource.OnNotEnough += OnInsufficient;
     }
 
     void OnChange()
     {
-        StartCoroutine(_change(resource.Amount));
+        if (this.isActiveAndEnabled)
+        {
+            StartCoroutine(_change());
+        }
     }
 
     void OnInsufficient()
     {
         StartCoroutine(_Insufficient());
+    }
+
+    IEnumerator _change()
+    {
+        if (resource.Amount > oldValue)
+        {
+            field.color = Color.green;
+        }
+        else if (resource.Amount < oldValue)
+        {
+            field.color = Color.red;
+        }
+
+        oldValue = resource.Amount;
+        field.text = resource.name + ": " + resource.Amount.ToString();
+        yield return new WaitForSeconds(1f);
+        field.color = Default;
     }
 
     IEnumerator _Insufficient()
@@ -35,31 +59,14 @@ public class ResourceViewer : MonoBehaviour {
 
         while (times <= 4)
         {
-            field.transform.Translate(Vector3.right*5);
+            field.transform.Translate(Vector3.right);
             yield return new WaitForSeconds(0.05f);
-            field.transform.Translate(Vector3.left*5);
+            field.transform.Translate(Vector3.left);
             yield return new WaitForSeconds(0.05f);
 
             times++;
         }
 
         field.color = old;
-    }
-
-    IEnumerator _change(int value)
-    {
-        int direction = -1;
-
-        if (value > oldValue)
-        {
-            direction = 1;
-        }
-
-        while (value != oldValue)
-        {
-            oldValue += direction;
-            field.text = resource.gameObject.name + ": " + oldValue;
-            yield return new WaitForSeconds(0.1f);
-        }
     }
 }

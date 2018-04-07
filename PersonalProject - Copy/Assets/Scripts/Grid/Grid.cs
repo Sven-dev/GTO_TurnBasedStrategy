@@ -78,7 +78,7 @@ public class Grid : MonoBehaviour
             for (int i = amount; i > 0; i--)
             {
                 Tile t = GetFreeTile();
-                Instantiate(g, t.transform.position + Vector3.up, Quaternion.identity, t.transform);
+                Instantiate(g, t.transform.position + Vector3.up / 5, Quaternion.identity, t.transform);
             }
         }
     }

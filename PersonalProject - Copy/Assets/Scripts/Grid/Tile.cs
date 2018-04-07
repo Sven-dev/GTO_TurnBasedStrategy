@@ -11,6 +11,19 @@ public class Tile : MonoBehaviour {
     private bool Selected;
     private Renderer r;
 
+    public Color Color
+    {
+        get
+        {
+            if (Owner != null)
+            {
+                return Owner.PlayerColor;
+            }
+
+            return Default;
+        }
+    }
+
     private void Awake()
     {
         r = GetComponent<Renderer>();
@@ -29,73 +42,69 @@ public class Tile : MonoBehaviour {
     {
         if (Owner == null)
         {
-            //Instantiate new object with player corner
-            //Place new object under current object, rotated 180°
-            //Start coroutine _setOwner()
-
             Owner = p;
             r.material.color = p.PlayerColor;
         }
     }
 
-    IEnumerator _setOwner(GameObject Old, GameObject New)
-    {
-        /*while (rotateobject.transform.rotation.x >= 0)
-        {
-            //Rotate both objects until current object is rotated 0°
-            rotateobject.transform.rotate(Vector3.left);
-        }
-
-        rotateobject.transform.rotation = Vector3.zero;
-
-        Destroy(Old);
-        Destroy old object */
-        yield return null;
-    }
-
     public void Select()
     {
         Selected = true;
-        GetComponent<Renderer>().material.color = Color.white;
+        StartCoroutine(_select());
+
+        Structure s = GetComponentInChildren<Structure>();
+        if (s != null)
+        {
+            s.ShowData();
+        }
     }
 
     public void Deselect()
     {
         Selected = false;
-        if (Owner == null)
-        {
-            GetComponent<Renderer>().material.color = Default;
-            return;
-        }
 
-        GetComponent<Renderer>().material.color = Owner.PlayerColor;
+        Structure s = GetComponentInChildren<Structure>();
+        if (s != null)
+        {
+            s.HideData();
+        }
     }
 
     //Pulsates the tile if selected
     IEnumerator _select()
     {
-        //fades aplha right now, needs to fade between selected and normal color.
-        float alpha = 0;
-        int direction = 1;
+        float t = 0;
+        bool direction = true;
+        float duration = 0.65f;
+
         while (Selected)
         {
-            r.material.color = new Color(
-                r.material.color.r,
-                r.material.color.g,
-                r.material.color.b,
-                r.material.color.a + direction * alpha);
-            alpha += direction * 0.01f;
-
-            if (alpha >= 1)
+            t += Time.deltaTime / duration;
+            if (direction)
             {
-                direction = -1;
+                r.material.color = Color.Lerp(Color, Color.white, t);
             }
-            else if (alpha <= 0)
+            else
             {
-                direction = 1;
+                r.material.color = Color.Lerp(Color.white, Color, t);
+            }
+
+            if (t > 1)
+            {
+                t = 0;
+                direction = !direction;
             }
 
             yield return null;
+        }
+
+        if (Owner == null)
+        {
+            GetComponent<Renderer>().material.color = Default;
+        }
+        else
+        {
+            GetComponent<Renderer>().material.color = Owner.PlayerColor;
         }
     }
 
