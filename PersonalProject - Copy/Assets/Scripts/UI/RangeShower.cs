@@ -16,15 +16,18 @@ public class RangeShower : MonoBehaviour {
     {
         Player player = PlayerManager.GetCurrentPlayer();
         Tile selected = player.SelectedTile;
-        if (selected != null && selected.Owner == null || selected.Owner == player)
+        if (selected != null)
         {
-            List<Tile> tiles = GetTiles(s, selected, player);
-
-            foreach (Tile t in tiles)
+            if (selected.Owner == null || selected.Owner == player)
             {
-                if (t != selected)
+                List<Tile> tiles = GetTiles(s, selected, player);
+
+                foreach (Tile t in tiles)
                 {
-                    t.Select();
+                    if (t != selected)
+                    {
+                        t.Select();
+                    }
                 }
             }
         }
@@ -80,18 +83,20 @@ public class RangeShower : MonoBehaviour {
     {
         Player player = PlayerManager.GetCurrentPlayer();
         Tile selected = player.SelectedTile;
-        if (selected != null && selected.Owner == null || selected.Owner == player)
+        if (selected != null)
         {
-            List<Tile> tiles = GetTiles(s, selected, player);
-
-            foreach (Tile t in tiles)
+            if (selected.Owner == null || selected.Owner == player)
             {
-                if (t != selected && t.Selected)
+                List<Tile> tiles = GetTiles(s, selected, player);
+
+                foreach (Tile t in tiles)
                 {
-                    t.Deselect();
+                    if (t != selected && t.Selected)
+                    {
+                        t.Deselect();
+                    }
                 }
             }
-
         }
     }
 

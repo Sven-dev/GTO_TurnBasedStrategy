@@ -20,7 +20,6 @@ public class UnitFactory : MonoBehaviour
             {
                 affordable = false;
                 c.resource.Insufficient();
-                print("You don't have enough " + c.resource.name);
             }           
         }
 

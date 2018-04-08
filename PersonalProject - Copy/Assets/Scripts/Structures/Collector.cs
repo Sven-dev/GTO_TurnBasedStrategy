@@ -12,7 +12,6 @@ public class Collector : Structure
     /// </summary>
     public void CollectResources()
     {
-        print("Collecting resources");
         this.Resource.Change(this.Amount);
     }
 
