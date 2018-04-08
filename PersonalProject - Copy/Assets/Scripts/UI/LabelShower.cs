@@ -22,7 +22,7 @@ public class LabelShower : MonoBehaviour
     {
         while (enabled)
         {
-            Rotatable.transform.Rotate((Vector3.down * 10) * Time.deltaTime);
+            Rotatable.transform.Rotate((Vector3.down * 25) * Time.deltaTime);
             yield return null;
         }
     }
